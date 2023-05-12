@@ -1,0 +1,25 @@
+{
+  "name": "unocss-native",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "private": true,
+  "scripts": {
+    "test": "vitest"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "@types/cssom": "^0.4.1",
+    "@types/jest": "^29.5.1",
+    "@unocss-native/preset-react-native": "workspace:*",
+    "@unocss/core": "^0.51.8",
+    "@unocss/preset-mini": "^0.51.8",
+    "css-to-react-native": "^3.2.0",
+    "cssom": "^0.5.0",
+    "jest": "^29.5.0",
+    "ts-jest": "^29.1.0",
+    "typescript": "^5.0.4"
+  }
+}
