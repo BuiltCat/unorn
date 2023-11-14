@@ -1,39 +1,37 @@
-import { Rule } from '@unocss/core'
 import { colorResolver } from '../utils/utilities'
 import { Theme } from '../theme'
-import {  handler as h } from '@unocss/preset-mini/utils'
-import { color, fontFamily } from './text'
+import { color } from './text'
+import { POINTER_EVENTS_ENUM } from './constant'
+import { Rule } from '@unocss-native/core'
+import { layout } from './layout'
 
 
 /**
- * @example backface-none backface-visible
+ * @example backface-hidden backface-visible backfacehidden backfacevisible
  */
-export const backfaceVisibility: Rule<Theme>[] =[
-    [/^backface-([-\w]+)$/, ([, v]) => ({backfaceVisibility: v})]
+export const backfaceVisibility: Rule<Theme>[] = [
+    [/^backface-?([-\w]+)$/, ([, v]) => ({ backfaceVisibility: v })]
 ]
 
 /**
  * @example bg-red bg-red-5 bg-red-100/2
  */
 export const backgroundColor: Rule<Theme>[] = [
-    [/^bg-(.+)$/, colorResolver('backgroundColor') , { autocomplete: 'bg-$colors' }]
+    [/^bg-(.+)$/, colorResolver('backgroundColor'), { autocomplete: 'bg-$colors' }]
 ]
 
 /**
  * @example op10 op-30 opacity-100
  */
 export const opacity: Rule<Theme>[] = [
-    [/^op(?:acity)?-?(.+)$/, ([, d]) => ({ opacity: h.bracket.percent.cssvar(d) })]
+    [/^op(?:acity)?-?(.+)$/, ([, d]) => ({ opacity: Number(d) / 100 })]
 ]
 
-const pointerEventsEnum = [
-    'auto',
-    'none',
-    'box-none',
-    'box-only'
-]
 
-export const pointerEvents: Rule<Theme>[] = pointerEventsEnum.map((keyword) => [`pointer-events-${keyword}`, { pointerEvents: keyword }])
+/**
+ * @example pointer-events-auto pointer-events-none pointer-events-box-none pointer-events-box-only
+ */
+export const pointerEvents: Rule<Theme>[] = POINTER_EVENTS_ENUM.map((keyword) => [`pointer-events-${keyword}`, { pointerEvents: keyword }])
 
 // export const borderBottomColor: Rule[] = [
 //      // compound
@@ -80,5 +78,5 @@ export const rules: Rule<Theme>[] = [
     opacity,
     pointerEvents,
     color,
-    fontFamily
+    layout
 ].flat(1)

@@ -1,54 +1,98 @@
-import { CSSObject, DynamicMatcher, RuleContext } from '@unocss/core'
-import { colorToString, parseColor, colorOpacityToString  } from '@unocss/preset-mini/utils'
+import { CSSObject, DynamicMatcher, RuleContext } from '@unocss-native/core'
 import { Theme } from '../theme'
 
+
+
+
 /**
- * Provide {@link DynamicMatcher} function to produce color value matched from rule.
+ * Parse color string into {@link ParsedColorValue} (if possible). Color value will first be matched to theme object before parsing.
+ * See also color.tests.ts for more examples.
  *
- * @see {@link parseColor}
+ * @example Parseable strings:
+ * 'red' // From theme, if 'red' is available
+ * 'red-100' // From theme, plus scale
+ * 'red-100/20' // From theme, plus scale/opacity
+ * ''[rgb(100,2,3)]/[var(--op)]'' // Bracket with rgb color and bracket with opacity
  *
+ * @param body - Color string to be parsed.
+ * @param theme - {@link Theme} object.
+ * @return object if string is parseable.
+ */
+export function parseColor(body: string, theme: Theme) {
+  const [main, opacity] = splitShorthand(body, 'color')
+
+  const colors = main.replace(/([a-z])([0-9])/g, '$1-$2').split(/-/g)
+  const [name] = colors
+
+  if (!name) return
+
+  let color: string | undefined
+
+  // const bracket = h.
+
+
+
+}
+
+
+// 处理 16 进制 和 rgba rgb hsl hsla hwb
+// 1. red =>  找到对应 theme 中的 red 没有就不添加
+// 2. red-100 => 找到对应 theme 中的 red { 100 } 如果没有 就不添加
+// 3. red-100/20 => 找到 theme 中的 red { 100 } 并添加 20/100的透明度 没有同上
+// 4. very-cool => 找到 theme 中的 very { cool } 并添加 没有同上
+// 5. very-cool-100/20 => 找到 theme 中 veryCool { 100 } 并添加 20 的透明度
+// 6. red-[rgba|rgb|hsl|hsla|hwb] => 直接提取[]中的颜色并添加
+/**
+ * 
+ * 
  * @example Resolving 'red' from theme:
  * colorResolver('background-color', 'background')('', 'red')
  * return { 'background-color': '#f12' }
- *
- * @example Resolving 'red-100' from theme:
- * colorResolver('background-color', 'background')('', 'red-100')
- * return { '--un-background-opacity': '1', 'background-color': 'rgba(254,226,226,var(--un-background-opacity))' }
- *
- * @example Resolving 'red-100/20' from theme:
- * colorResolver('background-color', 'background')('', 'red-100/20')
- * return { 'background-color': 'rgba(204,251,241,0.22)' }
- *
- * @example Resolving 'hex-124':
- * colorResolver('color', 'text')('', 'hex-124')
- * return { '--un-text-opacity': '1', 'color': 'rgba(17,34,68,var(--un-text-opacity))' }
- *
- * @param {string} property - Property for the css value to be created.
- * @param {function} [shouldPass] - Function to decide whether to pass the css.
- * @return {@link DynamicMatcher} object.
+ * 
+ * @param property 
+ * @param shouldPass 
+ * @returns 
  */
 export function colorResolver(property: string, shouldPass?: (css: CSSObject) => boolean): DynamicMatcher<Theme> {
-    return ([, body]: string[], { theme }: RuleContext<Theme>): CSSObject | undefined => {
-      const data = parseColor(body, theme)
-  
-      if (!data)
-        return
-  
-      const { alpha, color, cssColor } = data
-      const css: CSSObject = {}
-      if (cssColor) {
-        if (alpha != null) {
-          css[property] = colorToString(cssColor, alpha)
-        }
-        else {
-          css[property] = colorToString(cssColor, colorOpacityToString(cssColor))
-        }
+  return ([, body]: string[], { theme }: RuleContext<Theme>): CSSObject | undefined => {
+    // 处理 16 进制 和 rgba rgb hsl hsla hwb
+    // 1. red =>  找到对应 theme 中的 red 没有就不添加
+    // 2. red-100 => 找到对应 theme 中的 red { 100 } 如果没有 就不添加
+    // 3. red-100/20 => 找到 theme 中的 red { 100 } 并添加 20/100的透明度 没有同上
+    // 4. very-cool => 找到 theme 中的 very { cool } 并添加 没有同上
+    // 5. red-[rgba|rgb|hsl|hsla|hwb] => 直接提取[]中的颜色并添加
+    const values = body.split(/-/g);
+
+    const themeColor = theme.colors
+
+    const camel = body.replace(/(-[a-z])/g, n => n.slice(1).toUpperCase())
+
+    if (theme.colors[camel]) {
+      return {
+        backgroundColor: theme.colors[camel]
       }
-      else if (color) {
-        css[property] = colorToString(color, alpha)
-      }
-  
-      if (shouldPass?.(css) !== false)
-        return css
     }
+
+
+
+    if (!data)
+      return
+
+    const { alpha, color, cssColor } = data
+    const css: CSSObject = {}
+    if (cssColor) {
+      if (alpha != null) {
+        css[property] = colorToString(cssColor, alpha)
+      }
+      else {
+        css[property] = colorToString(cssColor, colorOpacityToString(cssColor))
+      }
+    }
+    else if (color) {
+      css[property] = colorToString(color, alpha)
+    }
+
+    if (shouldPass?.(css) !== false)
+      return css
   }
+}
