@@ -1,22 +1,25 @@
 {
   "name": "unocss-native",
+  "type": "module",
   "version": "0.0.1",
-  "description": "",
-  "main": "index.js",
   "private": true,
+  "description": "",
+  "author": "",
+  "license": "ISC",
+  "keywords": [],
+  "main": "index.js",
   "scripts": {
     "test": "vitest"
   },
-  "keywords": [],
-  "author": "",
-  "license": "ISC",
-  "devDependencies": {
-    "@unocss-native/core": "workspace:*",
-    "@unocss-native/preset-react-native": "workspace:*",
-    "typescript": "^5.0.4",
-    "vitest": "^0.34.4"
-  },
   "dependencies": {
     "react-native": "^0.72.5"
+  },
+  "devDependencies": {
+    "@antfu/eslint-config": "^2.6.1",
+    "@unocss-native/core": "workspace:*",
+    "@unocss-native/preset-react-native": "workspace:*",
+    "eslint": "^8.56.0",
+    "typescript": "^5.0.4",
+    "vitest": "^0.34.4"
   }
 }
