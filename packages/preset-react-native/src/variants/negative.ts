@@ -1,4 +1,16 @@
 import type { CSSObject, Variant } from '@unocss-native/core'
+import { numberRE } from '../utils/handlers/regex'
+import { round } from '../utils/handlers/handlers'
+
+export function negativePercent(str: string) {
+  if (str.endsWith('%'))
+    str = str.slice(0, -1)
+  if (!numberRE.test(str))
+    return
+  const num = -Number.parseFloat(str)
+  if (!Number.isNaN(num))
+    return `${num}%`
+}
 
 export const variantNegative: Variant = {
   name: 'negative',
@@ -18,8 +30,11 @@ export const variantNegative: Variant = {
           }
 
           if (typeof value === 'string') {
-            (body[key as keyof CSSObject] as any) = `-${value}`
-            changed = true
+            const nextValue = negativePercent(value)
+            if (nextValue) {
+              (body[key as keyof CSSObject] as any) = nextValue
+              changed = true
+            }
           }
         })
         if (changed)

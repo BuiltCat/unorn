@@ -1,4 +1,4 @@
-import type { TextStyle, ViewStyle } from 'react-native'
+import type { FlexStyle, ImageStyle, TextStyle, ViewStyle } from 'react-native'
 import type { UnoGenerator } from './generator'
 import type { CountableSet } from './utils'
 
@@ -13,7 +13,7 @@ export type RequiredByKey<T, K extends keyof T = keyof T> = FlatObjectTuple<
   Required<Pick<T, Extract<keyof T, K>>> & Omit<T, K>
 >
 
-export type CSSObject = TextStyle | ViewStyle
+export type CSSObject = TextStyle | ViewStyle | ImageStyle | FlexStyle
 export interface RuleContext<Theme extends object = object> {
   /**
    * Unprocessed selector from user input.
@@ -123,11 +123,10 @@ export interface RuleMeta {
   __hash?: string
 }
 
-export type CSSValue = CSSObject
 export type DynamicMatcher<Theme extends object = object> = (
   match: RegExpMatchArray,
   context: Readonly<RuleContext<Theme>>
-) => CSSValue | undefined
+) => CSSObject | undefined
 export type DynamicRule<Theme extends object = object> =
   | [RegExp, DynamicMatcher<Theme>]
   | [RegExp, DynamicMatcher<Theme>, RuleMeta]

@@ -5,14 +5,16 @@ import { rules } from '@unocss-native/preset-react-native'
 import { variants } from '../packages/preset-react-native/src/variants/default'
 
 describe('preset-react-native', () => {
-  it('flex', async () => {
+  it('display', async () => {
     const uno = createGenerator<Theme>({
       rules,
     })
-    const { css } = await uno.generate('flex')
+    const { css } = await uno.generate('flex hidden')
 
     expect(css).toEqual([[{
       display: 'flex',
+    }, {
+      display: 'none',
     }]])
   })
 
@@ -54,16 +56,19 @@ describe('preset-react-native', () => {
     }]])
   })
 
-  it('top/Right/Bottom/Left', async () => {
+  it('top/right/bottom/left', async () => {
     const uno = createGenerator<Theme>({
       rules,
       variants: variants(),
     })
-    const { css } = await uno.generate('bottom-1/2 bottom-2/4 bottom-full bottom-auto bottom-100 -bottom-100 -bottom-full')
+    const { css } = await uno.generate('bottom-1/2 left-1/2 bottom-2/4 bottom-full bottom-auto bottom-100 -bottom-100 -bottom-full')
 
     expect(css).toEqual([[
       {
         bottom: '50%',
+      },
+      {
+        left: '50%',
       },
       {
         bottom: '50%',
@@ -109,6 +114,95 @@ describe('preset-react-native', () => {
       {
         borderEndWidth: 100,
       },
+    ]])
+  })
+
+  it('justifyContent', async () => {
+    const uno = createGenerator<Theme>({
+      rules,
+    })
+    const { css } = await uno.generate('justify-start justify-end justify-center justify-between justify-around justify-evenly')
+
+    expect(css).toEqual([[
+      { justifyContent: 'flex-start' },
+      { justifyContent: 'flex-end' },
+      { justifyContent: 'center' },
+      { justifyContent: 'space-between' },
+      { justifyContent: 'space-around' },
+      { justifyContent: 'space-evenly' },
+    ]])
+  })
+
+  it('overflow', async () => {
+    const uno = createGenerator<Theme>({
+      rules,
+    })
+    const { css } = await uno.generate('overflow-visible overflow-hidden overflow-scroll')
+
+    expect(css).toEqual([[
+      { overflow: 'visible' },
+      { overflow: 'hidden' },
+      { overflow: 'scroll' },
+    ]])
+  })
+
+  it('position', async () => {
+    const uno = createGenerator<Theme>({
+      rules,
+    })
+    const { css } = await uno.generate('absolute relative')
+
+    expect(css).toEqual([[
+      { position: 'absolute' },
+      { position: 'relative' },
+    ]])
+  })
+
+  it('size', async () => {
+    const uno = createGenerator<Theme>({
+      rules,
+    })
+    const { css } = await uno.generate('w-1 w-2 w-10 w-10/12 size-1 size-2')
+
+    expect(css).toEqual([[
+      { position: 'absolute' },
+      { position: 'relative' },
+    ]])
+  })
+
+  it('gap', async () => {
+    const uno = createGenerator<Theme>({
+      rules,
+    })
+    const { css } = await uno.generate('gap-1 gap-2 gap-10')
+
+    expect(css).toEqual([[
+      { position: 'absolute' },
+      { position: 'relative' },
+    ]])
+  })
+
+  it('shrink grow basis', async () => {
+    const uno = createGenerator<Theme>({
+      rules,
+    })
+    const { css } = await uno.generate('grow grow-0 shrink shrink-0 basis-2 basis-auto basis-1/2')
+
+    expect(css).toEqual([[
+      { position: 'absolute' },
+      { position: 'relative' },
+    ]])
+  })
+
+  it('marign padding', async () => {
+    const uno = createGenerator<Theme>({
+      rules,
+    })
+    const { css } = await uno.generate('m-1 ma-1 ml-1 m-l-1 ma m-auto m-a-auto')
+
+    expect(css).toEqual([[
+      { position: 'absolute' },
+      { position: 'relative' },
     ]])
   })
 

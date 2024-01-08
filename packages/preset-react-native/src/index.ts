@@ -1,4 +1,4 @@
-import type { Preset, PresetOptions } from '@unocss/core'
+import type { Preset, PresetOptions } from '@unocss-native/core'
 import type { Theme } from './theme'
 import { theme } from './theme'
 import { rules } from './rules'
