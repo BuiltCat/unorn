@@ -32,7 +32,7 @@ export function bracket(str: string) {
   }
 }
 
-export function number(str: string) {
+export function number(str: string): number | undefined {
   if (!numberRE.test(str))
     return
   const num = Number.parseFloat(str)

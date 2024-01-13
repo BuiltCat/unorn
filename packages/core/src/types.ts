@@ -13,7 +13,7 @@ export type RequiredByKey<T, K extends keyof T = keyof T> = FlatObjectTuple<
   Required<Pick<T, Extract<keyof T, K>>> & Omit<T, K>
 >
 
-export type CSSObject = TextStyle | ViewStyle | ImageStyle | FlexStyle
+export type CSSObject = ViewStyle | TextStyle | ImageStyle
 export interface RuleContext<Theme extends object = object> {
   /**
    * Unprocessed selector from user input.

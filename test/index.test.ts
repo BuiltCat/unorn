@@ -94,8 +94,13 @@ describe('preset-react-native', () => {
   it('border', async () => {
     const uno = createGenerator<Theme>({
       rules,
+      theme: {
+        borderRadius: {
+          none: 0,
+        },
+      },
     })
-    const { css } = await uno.generate('border-0 border-1 border-x-100 border-s-100 border-e-100')
+    const { css } = await uno.generate('border-0 border-1 border-x-100 border-s-100 border-e-100 rounded-none rounded')
 
     expect(css).toEqual([[
       {
@@ -113,6 +118,12 @@ describe('preset-react-native', () => {
       },
       {
         borderEndWidth: 100,
+      },
+      {
+        borderRadius: 0,
+      },
+      {
+        borderRadius: 1,
       },
     ]])
   })
@@ -219,6 +230,244 @@ describe('preset-react-native', () => {
       {
         zIndex: 'auto',
       },
+    ]])
+  })
+
+  it('backfaceVisibility', async () => {
+    const uno = createGenerator<Theme>({
+      rules,
+    })
+    const { css } = await uno.generate('backface-hidden backface-visible')
+
+    expect(css).toEqual([[
+      {
+        backfaceVisibility: 'hidden',
+      },
+      {
+        backfaceVisibility: 'visible',
+      },
+    ]])
+  })
+
+  it('font size', async () => {
+    const uno = createGenerator<Theme>({
+      rules,
+      theme: {
+        fontSize: {
+          xl: 100,
+        },
+      },
+    })
+    const { css } = await uno.generate('text-100 text-xl')
+
+    expect(css).toEqual([[
+      {
+        fontSize: 100,
+      },
+      {
+        fontSize: 100,
+      },
+    ]])
+  })
+
+  it('font weight', async () => {
+    const uno = createGenerator<Theme>({
+      rules,
+      theme: {
+        fontWeight: {
+          normal: 'normal',
+          bold: 'bold',
+          100: '100',
+          200: '200',
+          300: '300',
+          400: '400',
+          500: '500',
+          600: '600',
+          700: '700',
+          800: '800',
+          900: '900',
+        },
+      },
+    })
+    const { css } = await uno.generate('font-100 font-normal')
+
+    expect(css).toEqual([[
+      {
+        fontWeight: '100',
+      },
+      {
+        fontWeight: 'normal',
+      },
+    ]])
+  })
+
+  it('line height', async () => {
+    const uno = createGenerator<Theme>({
+      rules,
+      theme: {
+        lineHeight: {
+          tight: 1.25,
+        },
+      },
+    })
+    const { css } = await uno.generate('leading-tight leading-2')
+
+    expect(css).toEqual([[
+      {
+        lineHeight: 1.25,
+      },
+      {
+        lineHeight: 2,
+      },
+    ]])
+  })
+
+  it('letter Spacing', async () => {
+    const uno = createGenerator<Theme>({
+      rules,
+      theme: {
+        letterSpacing: {
+          tight: 1.25,
+        },
+      },
+    })
+    const { css } = await uno.generate('tracking-tight tracking-2')
+
+    expect(css).toEqual([[
+      {
+        letterSpacing: 1.25,
+      },
+      {
+        letterSpacing: 2,
+      },
+    ]])
+  })
+
+  it('text align', async () => {
+    const uno = createGenerator<Theme>({
+      rules,
+      theme: {
+        letterSpacing: {
+          tight: 1.25,
+        },
+      },
+    })
+    const { css } = await uno.generate('text-center text-auto')
+
+    expect(css).toEqual([[
+      {
+        textAlign: 'center',
+      },
+      {
+        textAlign: 'auto',
+      },
+    ]])
+  })
+
+  it('text Transform', async () => {
+    const uno = createGenerator<Theme>({
+      rules,
+      theme: {
+        letterSpacing: {
+          tight: 1.25,
+        },
+      },
+    })
+    const { css } = await uno.generate('uppercase lowercase')
+
+    expect(css).toEqual([[
+      {
+        textTransform: 'uppercase',
+      },
+      {
+        textTransform: 'lowercase',
+      },
+    ]])
+  })
+
+  it('text DecorationLine', async () => {
+    const uno = createGenerator<Theme>({
+      rules,
+      theme: {
+        letterSpacing: {
+          tight: 1.25,
+        },
+      },
+    })
+    const { css } = await uno.generate('underline underline-through')
+
+    expect(css).toEqual([[
+      { textDecorationLine: 'underline' },
+      {
+        textDecorationLine: 'underline line-through',
+      },
+    ]])
+  })
+
+  it('opacity', async () => {
+    const uno = createGenerator<Theme>({
+      rules,
+      theme: {
+        letterSpacing: {
+          tight: 1.25,
+        },
+      },
+    })
+    const { css } = await uno.generate('opacity-1 opacity-100')
+
+    expect(css).toEqual([[
+      { opacity: 0.01 },
+      {
+        opacity: 1,
+      },
+    ]])
+  })
+
+  it('userSelect', async () => {
+    const uno = createGenerator<Theme>({
+      rules,
+      theme: {
+        letterSpacing: {
+          tight: 1.25,
+        },
+      },
+    })
+    const { css } = await uno.generate('select-none')
+
+    expect(css).toEqual([[
+      { userSelect: 'none' },
+    ]])
+  })
+
+  it('object Fit', async () => {
+    const uno = createGenerator<Theme>({
+      rules,
+      theme: {
+        letterSpacing: {
+          tight: 1.25,
+        },
+      },
+    })
+    const { css } = await uno.generate('object-contain')
+
+    expect(css).toEqual([[
+      { objectFit: 'contain' },
+    ]])
+  })
+
+  it('pointer Events', async () => {
+    const uno = createGenerator<Theme>({
+      rules,
+      theme: {
+        letterSpacing: {
+          tight: 1.25,
+        },
+      },
+    })
+    const { css } = await uno.generate('pointer-events-box-none')
+
+    expect(css).toEqual([[
+      { pointerEvents: 'box-none' },
     ]])
   })
 })

@@ -3,15 +3,20 @@ export interface Colors {
 }
 
 export interface Theme {
-  colors: Colors
+  colors?: Colors
   fontFamily?: Record<string, string>
-  borderWidth: Record<string, number>
-  zIndex: Record<string, number>
-  spacing: Record<string, number | string>
+  borderWidth?: Record<string, number>
+  zIndex?: Record<string, number>
+  spacing?: Record<string, number | string>
   width?: Record<string, string>
   height?: Record<string, string>
   maxWidth?: Record<string, string>
   maxHeight?: Record<string, string>
   minWidth?: Record<string, string>
   minHeight?: Record<string, string>
+  borderRadius?: Record<string, number>
+  fontSize?: Record<string, number>
+  fontWeight?: Record<string, 'bold' | '100' | '200' | '300' | '400' | '500' | '600' | '700' | '800' | '900' | 'normal'>
+  lineHeight?: Record<string, number>
+  letterSpacing?: Record<string, number>
 }

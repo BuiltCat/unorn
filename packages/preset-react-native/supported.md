@@ -1,6 +1,6 @@
 # React Native Style
 
-Progress - 53/55
+Progress - 89/127
 
 > Version: 0.73
 
@@ -64,85 +64,85 @@ Progress - 53/55
 - ✅ zIndex
 
 ## View Style Props
-> Progress 5/32
-- backfaceVisibility
-- backgroundColor
-- borderBottomColor
-- borderBottomEndRadius
-- borderBottomLeftRadius
-- borderBottomRightRadius
-- borderBottomStartRadius
-- borderStartEndRadius
-- borderStartStartRadius
-- borderEndEndRadius
-- borderEndStartRadius
+> Progress 18/32
+- ✅ backfaceVisibility
+- ❌ backgroundColor
+- ❌ borderBottomColor
+- ❌ borderBottomEndRadius
+- ✅ borderBottomLeftRadius
+- ✅ borderBottomRightRadius
+- ❌ borderBottomStartRadius
+- ✅ borderStartEndRadius
+- ✅ borderStartStartRadius
+- ✅ borderEndEndRadius
+- ✅ borderEndStartRadius
 - ✅ borderBottomWidth
-- borderColor
-- borderCurve - IOS
-- borderEndColor
-- borderLeftColor
+- ❌ borderColor
+- ❌ borderCurve - IOS
+- ❌ borderEndColor
+- ❌ borderLeftColor
 - ✅ borderLeftWidth
-- borderRadius
-- borderRightColor
+- ✅ borderRadius
+- ❌ borderRightColor
 - ✅ borderRightWidth
-- borderStartColor
-- borderStyle
-- borderTopColor
-- borderTopEndRadius
-- borderTopLeftRadius
-- borderTopRightRadius
-- borderTopStartRadius
+- ❌ borderStartColor
+- ✅ borderStyle
+- ❌ borderTopColor
+- ❌ borderTopEndRadius
+- ✅ borderTopLeftRadius
+- ✅ borderTopRightRadius
+- ❌ borderTopStartRadius
 - ✅ borderTopWidth
 - ✅ borderWidth
-- elevation - Android
-- opacity
-- pointerEvents
+- ❌ elevation - Android
+- ✅ opacity
+- ✅ pointerEvents
 
 ## Text Style Props
-> Progress 0/21
-- color
-- fontFamily
-- fontSize
-- fontStyle
-- fontWeight
-- includeFontPadding - Android
-- fontVariant
-- letterSpacing
-- lineHeight
-- textAlign
-- textAlignVertical - Android
-- textDecorationColor - IOS
-- textDecorationLine
-- textDecorationStyle - IOS
-- textShadowColor
-- textShadowOffset
-- textShadowRadius
-- textTransform
-- verticalAlign - Android
-- writingDirection - IOS
-- userSelect
+> Progress 9/21
+- ❌ color
+- ❌ fontFamily
+- ✅ fontSize
+- ✅ fontStyle
+- ✅ fontWeight
+- ❌ includeFontPadding - Android
+- ❌ fontVariant
+- ✅ letterSpacing
+- ✅ lineHeight
+- ✅ textAlign
+- ❌ textAlignVertical - Android
+- ❌ textDecorationColor - IOS
+- ✅ textDecorationLine
+- ❌ textDecorationStyle - IOS
+- ❌ textShadowColor
+- ❌ textShadowOffset
+- ❌ textShadowRadius
+- ✅ textTransform
+- ❌ verticalAlign - Android
+- ❌ writingDirection - IOS
+- ✅ userSelect
 
 ## Shadow Props
 > Progress 0/4
-- shadowColor
-- shadowOffset - IOS
-- shadowOpacity - IOS
-- shadowRadius
+- ❌ shadowColor
+- ❌ shadowOffset - IOS
+- ❌ shadowOpacity - IOS
+- ❌ shadowRadius
 
 ## Image Style Props
-> Progress 2/15
-- backfaceVisibility
-- backgroundColor
-- borderBottomLeftRadius
-- borderBottomRightRadius
-- borderColor
-- borderRadius
-- borderTopLeftRadius
-- borderTopRightRadius
+> Progress 10/15
+- ✅ backfaceVisibility
+- ❌ backgroundColor
+- ✅ borderBottomLeftRadius
+- ✅ borderBottomRightRadius
+- ❌ borderColor
+- ✅ borderRadius
+- ✅ borderTopLeftRadius
+- ✅ borderTopRightRadius
 - ✅ borderWidth
-- opacity
+- ✅ opacity
 - ✅ overflow
-- overlayColorAndroid
-- resizeMode
-- objectFit
-- tintColor
+- ❌ overlayColor - Android
+- ❌ resizeMode
+- ✅ objectFit
+- ❌ tintColor
