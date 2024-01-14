@@ -1,4 +1,4 @@
-import type { FlexStyle, ImageStyle, TextStyle, ViewStyle } from 'react-native'
+import type { ImageStyle, TextStyle, ViewStyle } from 'react-native'
 import type { UnoGenerator } from './generator'
 import type { CountableSet } from './utils'
 
@@ -14,6 +14,11 @@ export type RequiredByKey<T, K extends keyof T = keyof T> = FlatObjectTuple<
 >
 
 export type CSSObject = ViewStyle | TextStyle | ImageStyle
+export interface CSSColorValue {
+  type: string
+  components: (string | number)[]
+  alpha: string | number | undefined
+}
 export interface RuleContext<Theme extends object = object> {
   /**
    * Unprocessed selector from user input.

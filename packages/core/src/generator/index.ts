@@ -148,8 +148,8 @@ export class UnoGenerator<Theme extends object = object> {
     const getLayer = (layer: string) => {
       if (layerCache[layer])
         return layerCache[layer]
-      console.log('look at:', sheet)
-      const css = Array.from(sheet).map(([, selector, body]) => {
+
+      const css = Array.from(sheet).map(([, , body]) => {
         return body
       })
 

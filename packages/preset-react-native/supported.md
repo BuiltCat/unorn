@@ -1,6 +1,6 @@
 # React Native Style
 
-Progress - 89/127
+Progress - 100/127
 
 > Version: 0.73
 
@@ -64,10 +64,10 @@ Progress - 89/127
 - ✅ zIndex
 
 ## View Style Props
-> Progress 18/32
+> Progress 26/32
 - ✅ backfaceVisibility
-- ❌ backgroundColor
-- ❌ borderBottomColor
+- ✅ backgroundColor
+- ✅ borderBottomColor
 - ❌ borderBottomEndRadius
 - ✅ borderBottomLeftRadius
 - ✅ borderBottomRightRadius
@@ -77,17 +77,17 @@ Progress - 89/127
 - ✅ borderEndEndRadius
 - ✅ borderEndStartRadius
 - ✅ borderBottomWidth
-- ❌ borderColor
+- ✅ borderColor
 - ❌ borderCurve - IOS
-- ❌ borderEndColor
-- ❌ borderLeftColor
+- ✅ borderEndColor
+- ✅ borderLeftColor
 - ✅ borderLeftWidth
 - ✅ borderRadius
-- ❌ borderRightColor
+- ✅ borderRightColor
 - ✅ borderRightWidth
-- ❌ borderStartColor
+- ✅ borderStartColor
 - ✅ borderStyle
-- ❌ borderTopColor
+- ✅ borderTopColor
 - ❌ borderTopEndRadius
 - ✅ borderTopLeftRadius
 - ✅ borderTopRightRadius
@@ -99,8 +99,8 @@ Progress - 89/127
 - ✅ pointerEvents
 
 ## Text Style Props
-> Progress 9/21
-- ❌ color
+> Progress 10/21
+- ✅ color
 - ❌ fontFamily
 - ✅ fontSize
 - ✅ fontStyle
@@ -130,12 +130,12 @@ Progress - 89/127
 - ❌ shadowRadius
 
 ## Image Style Props
-> Progress 10/15
+> Progress 12/15
 - ✅ backfaceVisibility
-- ❌ backgroundColor
+- ✅ backgroundColor
 - ✅ borderBottomLeftRadius
 - ✅ borderBottomRightRadius
-- ❌ borderColor
+- ✅ borderColor
 - ✅ borderRadius
 - ✅ borderTopLeftRadius
 - ✅ borderTopRightRadius

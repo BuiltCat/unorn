@@ -1,6 +1,5 @@
 import type { CSSObject, Variant } from '@unocss-native/core'
 import { numberRE } from '../utils/handlers/regex'
-import { round } from '../utils/handlers/handlers'
 
 export function negativePercent(str: string) {
   if (str.endsWith('%'))

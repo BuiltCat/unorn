@@ -1,4 +1,4 @@
-export const borderDirectionMap: Record<string, string[]> = {
+export const borderDirectionMap: Record<string, ('Left' | 'Right' | 'Top' | 'Bottom' | 'Start' | 'End' | '')[]> = {
   'l': ['Left'],
   'r': ['Right'],
   't': ['Top'],

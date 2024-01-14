@@ -31,7 +31,7 @@ export const backfaceVisibility: Rule<Theme>[] = [
  * @example bg-red bg-red-50 bg-red-100/2
  */
 export const backgroundColor: Rule<Theme>[] = [
-  [/^bg-(.+)$/, colorResolver('backgroundColor')],
+  [/^bg-(.+)$/, colorResolver('backgroundColor', 'backgroundColor')],
 ]
 
 /**

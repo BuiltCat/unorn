@@ -1,5 +1,87 @@
-import type { CSSObject, DynamicMatcher, RuleContext } from '@unocss-native/core'
+import { type CSSObject, type DynamicMatcher, type RuleContext, isString } from '@unocss-native/core'
 import type { Theme } from '../theme'
+import { h } from './handlers'
+import { hexToRGB } from './colors'
+
+export const bracketTypeRe = /^\[(color|length|position|quoted|string):/i
+
+type ThemeColorKeys = 'backgroundColor' | 'colors' | 'textColor'
+
+export function getStringComponent(str: string, open: string, close: string, separators: string | string[]) {
+  if (str === '')
+    return
+
+  if (isString(separators))
+    separators = [separators]
+
+  const l = str.length
+
+  let parenthesis = 0
+  for (let i = 0; i < l; i++) {
+    switch (str[i]) {
+      case open:
+        parenthesis++
+        break
+      case close:
+        if (--parenthesis < 0)
+          return
+        break
+
+      default:
+        for (const separator of separators) {
+          const separatorLength = separator.length
+          if (separatorLength && separator === str.slice(i, i + separatorLength) && parenthesis === 0) {
+            if (i === 0 || i === l - separatorLength)
+              return
+            return [
+              str.slice(0, i),
+              str.slice(i + separatorLength),
+            ]
+          }
+        }
+    }
+  }
+
+  return [
+    str,
+    '',
+  ]
+}
+
+function getThemeColorForKey(theme: Theme, colors: string[], key: ThemeColorKeys = 'colors') {
+  let obj = theme[key] as Theme['colors'] | string
+  let index = -1
+
+  for (const c of colors) {
+    index += 1
+    if (obj && typeof obj !== 'string') {
+      const camel = colors.slice(index).join('-').replace(/(-[a-z])/g, n => n.slice(1).toUpperCase())
+      if (obj[camel])
+        return obj[camel]
+
+      if (obj[c]) {
+        obj = obj[c]
+        continue
+      }
+    }
+    return undefined
+  }
+  return obj
+}
+
+function getThemeColor(theme: Theme, colors: string[], key?: ThemeColorKeys) {
+  return getThemeColorForKey(theme, colors, key) || getThemeColorForKey(theme, colors, 'colors')
+}
+
+export function splitShorthand(body: string, type: string) {
+  const [front, rest] = getStringComponent(body, '[', ']', ['/']) ?? []
+  if (front != null) {
+    const match = (front.match(bracketTypeRe) ?? [])[1]
+
+    if (match == null || match === type)
+      return [front, rest]
+  }
+}
 
 /**
  * Parse color string into {@link ParsedColorValue} (if possible). Color value will first be matched to theme object before parsing.
@@ -9,14 +91,18 @@ import type { Theme } from '../theme'
  * 'red' // From theme, if 'red' is available
  * 'red-100' // From theme, plus scale
  * 'red-100/20' // From theme, plus scale/opacity
- * ''[rgb(100,2,3)]/[var(--op)]'' // Bracket with rgb color and bracket with opacity
+ * ''[rgb(100 2 3)]/[var(--op)]'' // Bracket with rgb color and bracket with opacity
  *
  * @param body - Color string to be parsed.
  * @param theme - {@link Theme} object.
  * @return object if string is parseable.
  */
-export function parseColor(body: string, theme: Theme) {
-  const [main, opacity] = splitShorthand(body, 'color')
+export function parseColor(body: string, theme: Theme, key?: ThemeColorKeys) {
+  const split = splitShorthand(body, 'color')
+
+  if (!split)
+    return
+  const [main, opacity] = split
 
   const colors = main.replace(/([a-z])([0-9])/g, '$1-$2').split(/-/g)
   const [name] = colors
@@ -24,30 +110,73 @@ export function parseColor(body: string, theme: Theme) {
   if (!name)
     return
 
-  let color: string | undefined
+  let color
 
-  // const bracket = h.
+  const bracket = h.bracket(main)
+  const bracketOrMain = bracket || main
+
+  if (typeof bracketOrMain !== 'string')
+    return
+
+  if (/^#[\da-fA-F]+/.test(bracketOrMain))
+    color = bracketOrMain
+
+  color = color || bracket
+
+  if (!color) {
+    const colorData = getThemeColor(theme, [main], key)
+    if (typeof colorData === 'string')
+      color = colorData
+  }
+
+  let no = 'DEFAULT'
+  if (!color) {
+    let colorData
+    const [scale] = colors.slice(-1)
+    if (/^\d+$/.test(scale)) {
+      no = scale
+      colorData = getThemeColor(theme, colors.slice(0, -1), key)
+      if (!colorData || typeof colorData === 'string')
+        color = undefined
+      else
+        color = colorData[no] as string
+    }
+    else {
+      colorData = getThemeColor(theme, colors, key)
+      if (!colorData && colors.length <= 2) {
+        [, no = no] = colors
+        colorData = getThemeColor(theme, [name], key)
+      }
+      if (typeof colorData === 'string')
+        color = colorData
+      else if (no && colorData)
+        color = colorData[no] as string
+    }
+  }
+
+  return {
+    color,
+    alpha: h.bracket.percent(opacity ?? ''),
+  }
 }
 
-// 处理 16 进制 和 rgba rgb hsl hsla hwb
-// 1. red =>  找到对应 theme 中的 red 没有就不添加
-// 2. red-100 => 找到对应 theme 中的 red { 100 } 如果没有 就不添加
-// 3. red-100/20 => 找到 theme 中的 red { 100 } 并添加 20/100的透明度 没有同上
-// 4. very-cool => 找到 theme 中的 very { cool } 并添加 没有同上
-// 5. very-cool-100/20 => 找到 theme 中 veryCool { 100 } 并添加 20 的透明度
-// 6. red-[rgba|rgb|hsl|hsla|hwb] => 直接提取[]中的颜色并添加
 /**
- *
- *
  * @example Resolving 'red' from theme:
  * colorResolver('background-color', 'background')('', 'red')
  * return { 'background-color': '#f12' }
  *
  * @param property
- * @param shouldPass
- * @returns
  */
-export function colorResolver(property: string, shouldPass?: (css: CSSObject) => boolean): DynamicMatcher<Theme> {
+export function colorResolver(property:
+  'backgroundColor' |
+  'color' |
+  'borderBottomColor' |
+  'borderColor' |
+  'borderEndColor' |
+  'borderLeftColor' |
+  'borderRightColor' |
+  'borderStartColor' |
+  'borderTopColor', key?: ThemeColorKeys): DynamicMatcher<Theme> {
   return ([, body]: string[], { theme }: RuleContext<Theme>): CSSObject | undefined => {
     // 处理 16 进制 和 rgba rgb hsl hsla hwb
     // 1. red =>  找到对应 theme 中的 red 没有就不添加
@@ -55,35 +184,25 @@ export function colorResolver(property: string, shouldPass?: (css: CSSObject) =>
     // 3. red-100/20 => 找到 theme 中的 red { 100 } 并添加 20/100的透明度 没有同上
     // 4. very-cool => 找到 theme 中的 very { cool } 并添加 没有同上
     // 5. red-[rgba|rgb|hsl|hsla|hwb] => 直接提取[]中的颜色并添加
-    const values = body.split(/-/g)
 
-    const themeColor = theme.colors
-
-    const camel = body.replace(/(-[a-z])/g, n => n.slice(1).toUpperCase())
-
-    if (theme.colors[camel]) {
-      return {
-        backgroundColor: theme.colors[camel],
-      }
-    }
-
+    const data = parseColor(body, theme, key)
     if (!data)
       return
+    const { alpha, color } = data
 
-    const { alpha, color, cssColor } = data
-    const css: CSSObject = {}
-    if (cssColor) {
-      if (alpha != null)
-        css[property] = colorToString(cssColor, alpha)
+    const tColor = transformColor(alpha, color)
 
-      else
-        css[property] = colorToString(cssColor, colorOpacityToString(cssColor))
+    return {
+      [property]: tColor ?? color,
     }
-    else if (color) {
-      css[property] = colorToString(color, alpha)
-    }
+  }
+}
 
-    if (shouldPass?.(css) !== false)
-      return css
+export function transformColor(alpha: string | number | undefined, color: string | number | undefined) {
+  if (alpha) {
+    if (/^#[(0-9|a-f)]+$/.test(color)) {
+      const rgb = hexToRGB(color)
+      return `rgba(${rgb.join(',')},${alpha})`
+    }
   }
 }

@@ -1,7 +1,7 @@
 import { describe, expect, it } from 'vitest'
 import { createGenerator } from '@unocss-native/core'
 import type { Theme } from '@unocss-native/preset-react-native'
-import { rules } from '@unocss-native/preset-react-native'
+import { rules, theme } from '@unocss-native/preset-react-native'
 import { variants } from '../packages/preset-react-native/src/variants/default'
 
 describe('preset-react-native', () => {
@@ -468,6 +468,40 @@ describe('preset-react-native', () => {
 
     expect(css).toEqual([[
       { pointerEvents: 'box-none' },
+    ]])
+  })
+  it('background', async () => {
+    const uno = createGenerator<Theme>({
+      rules,
+      theme,
+    })
+    const { css } = await uno.generate('bg-sky-500/50 bg-sky-500/[.06]')
+
+    expect(css).toEqual([[
+      { background: 'box-none' },
+    ]])
+  })
+  it('text color', async () => {
+    const uno = createGenerator<Theme>({
+      rules,
+      theme,
+    })
+    const { css } = await uno.generate('text-sky-500/50 text-sky-500/[.06]')
+
+    expect(css).toEqual([[
+      { background: 'box-none' },
+    ]])
+  })
+
+  it('border color', async () => {
+    const uno = createGenerator<Theme>({
+      rules,
+      theme,
+    })
+    const { css } = await uno.generate('border-sky-500/50 border-x-sky-500/[.06]')
+
+    expect(css).toEqual([[
+      { background: 'box-none' },
     ]])
   })
 })

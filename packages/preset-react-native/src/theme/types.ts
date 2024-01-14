@@ -1,9 +1,7 @@
-export interface Colors {
-  [key: string]: Colors | string
-}
-
 export interface Theme {
-  colors?: Colors
+  backgroundColor?: Record<string, string | Record<string, string>>
+  colors?: Record<string, string | Record<string, string>>
+  textColor?: Record<string, string | Record<string, string>>
   fontFamily?: Record<string, string>
   borderWidth?: Record<string, number>
   zIndex?: Record<string, number>

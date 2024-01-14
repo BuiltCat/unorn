@@ -4,7 +4,7 @@ import { text } from './text'
 import { layout } from './layout'
 import { border } from './border'
 import { image } from './image'
-import { backfaceVisibility, opacity, pointerEvents } from './view'
+import { backfaceVisibility, backgroundColor, opacity, pointerEvents } from './view'
 
 export const rules: Rule<Theme>[] = [
   text,
@@ -14,4 +14,5 @@ export const rules: Rule<Theme>[] = [
   backfaceVisibility,
   opacity,
   pointerEvents,
+  backgroundColor,
 ].flat(1)

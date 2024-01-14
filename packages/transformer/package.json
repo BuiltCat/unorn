@@ -2,16 +2,16 @@
   "name": "@unocss-native/transformer",
   "version": "0.0.1",
   "description": "",
+  "author": "",
+  "license": "ISC",
+  "keywords": [],
   "main": "src/index.ts",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "devDependencies": {
-    "react": "^18.2.0",
     "@types/react": "^18.2.25",
-    "@unocss-native/core": "workspace:*"
-  },
-  "keywords": [],
-  "author": "",
-  "license": "ISC"
+    "@unocss-native/core": "workspace:*",
+    "react": "^18.2.0"
+  }
 }

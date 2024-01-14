@@ -1,8 +1,8 @@
 // import { Rule } from '@unocss/core'
 import type { CSSObject, Rule, RuleContext } from '@unocss-native/core'
-import { colorResolver } from '../utils/utilities'
 import type { Theme } from '../theme'
 import { h } from '../utils/handlers'
+import { colorResolver } from '../utils/utilities'
 
 // import {  handler as h } from '@unocss/preset-mini/utils'
 
@@ -32,7 +32,10 @@ function handleThemeByKey(s: string, theme: Theme, key: 'lineHeight' | 'letterSp
 export const text: Rule<Theme>[] = [
 
   // fontSize
-  [/^(?:text)-(.+)$/, handleSize],
+  [/^text-(.+)$/, handleSize],
+
+  // fontSize
+  [/^text-(.+)$/, colorResolver('color', 'textColor')],
 
   // fontStyle
   ['italic', { fontStyle: 'italic' }],

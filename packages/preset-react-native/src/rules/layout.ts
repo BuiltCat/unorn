@@ -2,6 +2,7 @@ import type { CSSObject, DynamicMatcher, Rule, RuleContext } from '@unocss-nativ
 import type { Theme } from '../theme'
 import { h } from '../utils/handlers'
 import { borderDirectionMap, directionMap, sizeMapping } from '../utils/mappings'
+import { parseColor, transformColor } from '../utils/utilities'
 
 type BorderProps = 'borderLeftWidth' | 'borderRightWidth'
 
@@ -24,6 +25,22 @@ function handlerBorderWidth([, a = '', b]: string[], { theme }: RuleContext<Them
   if (a in borderDirectionMap && v != null) {
     borderDirectionMap[a].forEach((i) => {
       props[`border${i}Width` as BorderProps] = v
+    })
+  }
+  return props
+}
+
+function handlerBorderColor([, a = '', b]: string[], { theme }: RuleContext<Theme>): CSSObject | undefined {
+  // const v = theme.borderWidth?.[b || 'DEFAULT'] ?? h.bracket.number(b)
+  const props: CSSObject = {}
+  if (a in borderDirectionMap) {
+    borderDirectionMap[a].forEach((i) => {
+      const data = parseColor(b, theme)
+      if (!data)
+        return
+      const color = transformColor(data.alpha, data.color)
+      if (color)
+        props[`border${i}Color`] = color
     })
   }
   return props
@@ -113,6 +130,9 @@ export const layout: Rule<Theme>[] = [
   // borderBottomWidth borderEndWidth borderLeftWidth borderRightWidth borderStartWidth borderTopWidth borderWidth
   [/^(?:border)()(?:-(.+))?$/, handlerBorderWidth],
   [/^(?:border)-([xylrtbse])(?:-(.+))?$/, handlerBorderWidth],
+
+  [/^(?:border)()(?:-(.+))?$/, handlerBorderColor],
+  [/^(?:border)-([xylrtbse])(?:-(.+))?$/, handlerBorderColor],
 
   // top left right bottom start end
   [/^(-?)(top|left|right|bottom|start|end)-(.+)$/, ([, s, d, v], ctx) => ({ [d]: handleInsetValue(s, v, ctx) })],

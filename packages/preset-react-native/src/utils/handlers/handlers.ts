@@ -1,6 +1,6 @@
 import { numberRE } from './regex'
 
-export function round(n: number) {
+function round(n: number) {
   return n.toFixed(10).replace(/\.0+$/, '').replace(/(\.\d+?)0+$/, '$1')
 }
 

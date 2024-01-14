@@ -3,7 +3,7 @@ import * as valueHandlers from './handlers'
 export type ValueHandlerCallback = (str: string) => string | number | undefined
 
 export type ValueHandler<K extends string> = { [S in K]: ValueHandler<K> } & {
-  (str: string): number | undefined
+  (str: string): string | number | undefined
   __options: {
     sequence: K[]
   }
