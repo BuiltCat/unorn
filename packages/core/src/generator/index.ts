@@ -144,32 +144,38 @@ export class UnoGenerator<Theme extends object = object> {
 
     await Promise.all(tokenPromises)
 
-    const layerCache: Record<string, string> = {}
-    const getLayer = (layer: string) => {
-      if (layerCache[layer])
-        return layerCache[layer]
+    // const layerCache: Record<string, string> = {}
+    // const getLayer = (layer: string) => {
+    // if (layerCache[layer])
+    // return layerCache[layer]
 
-      const css = Array.from(sheet).map(([, , body]) => {
-        return body
-      })
+    // const css = Array.from(sheet).map(([, , body]) => {
+    //   return body
+    // })
 
-      return css
-    }
+    // return css
+    // }
 
-    const getLayers = () => {
-      return [''].map(i => getLayer(i) || '').filter(Boolean)
-    }
+    // const getLayers = () => {
+    //   return [''].map(i => getLayer(i) || '').filter(Boolean)
+    // }
 
     return {
-      get css() {
-        return getLayers()
-      },
-      get style() {
-        return [''].map(i => getLayer(i) || '').filter(Boolean).reduce((pre, cur) => Object.assign(pre, ...cur), {})
+      // get css() {
+      //   return getLayers()
+      // },
+      // StyleSheet
+      get styles() {
+        return Array.from(sheet).reduce((prev, [, , body]) => {
+          return {
+            ...prev,
+            ...body,
+          }
+        }, {})
       },
       matched,
-      getLayers,
-      getLayer,
+      // getLayers,
+      // getLayer,
     }
   }
 

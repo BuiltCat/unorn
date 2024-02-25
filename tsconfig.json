@@ -6,13 +6,14 @@
     "module": "ESNext",
     "moduleResolution": "node",
     "paths": {
-      "@unocss-native/preset-react-native": ["./packages/preset-react-native/src/index.ts"],
-      "@unocss-native/core": ["./packages/core/src/index.ts"],
-      "@unocss-native/transformer": ["./packages/transformer/src/index.ts"]
+      "@unorn/preset-react-native": ["./packages/preset-react-native/src/index.ts"],
+      "@unorn/core": ["./packages/core/src/index.ts"],
+      "@unorn/transformer": ["./packages/transformer/src/index.ts"]
     },
     "strict": true,
     "esModuleInterop": true,
     "forceConsistentCasingInFileNames": true,
     "skipLibCheck": true
-  }
+  },
+  "exclude": ["coverage", "docs", "eslint.config.js"]
 }

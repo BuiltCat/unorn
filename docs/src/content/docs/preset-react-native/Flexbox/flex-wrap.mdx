@@ -1,0 +1,23 @@
+---
+title: Flex Wrap
+---
+
+import { Card, CardGrid } from '@astrojs/starlight/components';
+
+![type](https://img.shields.io/badge/type%3A%20row%2C%20string-required%3A%20No-%23DEBCFF?style=for-the-badge&labelColor=%235C19E3)
+
+
+`flexWrap` controls whether children can wrap around after they hit the end of a flex container.
+It works like `flex-wrap` in CSS (default: nowrap). 
+See https://developer.mozilla.org/en-US/docs/Web/CSS/flex-wrap for more details. 
+Note it does not work anymore with `alignItems: stretch` (the default), 
+so you may want to use `alignItems: flex-start` for example 
+(breaking change details: https://github.com/facebook/react-native/releases/tag/v0.28.0).
+
+### Basic usage
+
+```typescript
+'flex-wrap' -> { flexWrap: 'wrap' }
+'flex-wrap-reverse' -> { flexWrap: 'wrap-reverse' }
+'flex-nowrap' -> { flexWrap: 'nowrap' }
+```

@@ -1,0 +1,24 @@
+---
+title: Flex Basis
+---
+
+import { Card, CardGrid } from '@astrojs/starlight/components';
+
+![type](https://img.shields.io/badge/type%3A%20number%2C%20string-required%3A%20No-%23DEBCFF?style=for-the-badge&labelColor=%235C19E3)
+
+
+`flexBasis` is an axis-independent way of providing the default size of 
+an item along the main axis. Setting the `flexBasis` of a child is similar 
+to setting the `width` of that child if its parent is a container with `flexDirection: row` 
+or setting the height of a child if its parent is a container with `flexDirection: column`. 
+The `flexBasis` of an item is the default size of that item, 
+the size of the item before any `flexGrow` and `flexShrink` calculations are performed.
+
+### Basic usage
+
+```typescript
+'basis-0' -> { flexBasis: 0 }
+'basis-1' -> { flexBasis: 1 }
+'basis-1/2' -> { flexBasis: '50%' }
+'basis-full' -> { flexBasis: '100%' }
+```

@@ -24,9 +24,9 @@ export function bracket(str: string) {
     }
     if (curly)
       return
-    if (!numberRE.test(str))
+    if (!numberRE.test(base))
       return base
-    const num = Number.parseFloat(str)
+    const num = Number.parseFloat(base)
     if (!Number.isNaN(num))
       return num
   }
@@ -64,5 +64,5 @@ export function percent(str: string) {
     return
   const num = Number.parseFloat(str)
   if (!Number.isNaN(num))
-    return `${round(num / 100)}`
+    return round(num / 100)
 }

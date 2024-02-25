@@ -1,0 +1,54 @@
+---
+title: Aspect Ratio
+description: 此属性控制元素的宽高比。
+---
+
+import { Card, CardGrid } from '@astrojs/starlight/components';
+
+此属性控制元素的宽高比。
+
+## 基本使用
+
+使用`aspect-{ratio}`设置元素的aspectRatio。
+
+```typescript
+'aspect-auto' -> { aspectRatio: 'auto' }
+'aspect-square' -> { aspectRatio: '1/1' }
+'aspect-video' -> { aspectRatio: '16/9' }
+'aspect-4/2' -> { aspectRatio: '4/2' }
+```
+
+
+## 自定义
+
+### 自定义主题
+
+默认情况下，该预设只会提供一组基本的主题设置。你可以通过以下方式进行自定义主题。
+
+```diff lang="javascript"
+{
+    theme: {
+        aspectRatio: {
++            '4/3': '4 / 3',
++            '1': '1'
+        },
+    }
+}
+```
+
+### 任意值
+
+在有一些情况下，你可能需要使用没有意义的一次性值，那么使用方括号`[]`定义任意值生成动态属性。
+
+```typescript
+'aspect-[4/3]'  -> { aspectRatio: '4/3' }
+```
+
+
+![type](https://img.shields.io/badge/type%3A%20number%2C%20string-required%3A%20No-%23DEBCFF?style=for-the-badge&labelColor=%235C19E3)
+
+## 文档
+
+如果对此属性不熟悉，可以查看React Native的官方文档，链接在这里。
+
+[View Style Props#aspectratio](https://reactnative.dev/docs/layout-props#aspectratio)

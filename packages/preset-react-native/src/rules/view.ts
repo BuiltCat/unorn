@@ -3,7 +3,7 @@
  * @version 0.73
  */
 
-import type { CSSObject, Rule } from '@unocss-native/core'
+import type { CSSObject, Rule } from '@unorn/core'
 import type { Theme } from '../theme'
 import { colorResolver } from '../utils/utilities'
 import { h } from '../utils/handlers'

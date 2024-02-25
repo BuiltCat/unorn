@@ -1,5 +1,5 @@
 {
-  "name": "unocss-native",
+  "name": "unorn",
   "type": "module",
   "version": "0.0.1",
   "private": true,
@@ -9,21 +9,24 @@
   "keywords": [],
   "main": "index.js",
   "scripts": {
+    "docs": "pnpm -C docs run dev",
     "test": "vitest",
     "prepare": "husky install",
     "lint": "eslint --cache .",
-    "lint:fix": "eslint --fix"
+    "lint:fix": "eslint --fix",
+    "coverage": "vitest run --coverage"
   },
   "dependencies": {
     "react-native": "^0.73.2"
   },
   "devDependencies": {
     "@antfu/eslint-config": "^2.6.1",
-    "@unocss-native/core": "workspace:*",
-    "@unocss-native/preset-react-native": "workspace:*",
+    "@unorn/core": "workspace:*",
+    "@unorn/preset-react-native": "workspace:*",
+    "@vitest/coverage-v8": "^1.2.1",
     "eslint": "^8.56.0",
     "husky": "^8.0.3",
     "typescript": "^5.0.4",
-    "vitest": "^0.34.4"
+    "vitest": "^1.2.1"
   }
 }

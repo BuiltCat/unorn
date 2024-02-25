@@ -1,4 +1,4 @@
-import type { CSSObject, Rule, RuleContext } from '@unocss-native/core'
+import type { CSSObject, Rule, RuleContext } from '@unorn/core'
 import type { Theme } from '../theme'
 import { h } from '../utils/handlers'
 import type { BorderStyle } from '../utils/mappings'

@@ -1,4 +1,4 @@
-import type { Rule } from '@unocss-native/core'
+import type { Rule } from '@unorn/core'
 import type { Theme } from '../theme'
 import { text } from './text'
 import { layout } from './layout'

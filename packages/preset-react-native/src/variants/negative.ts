@@ -1,4 +1,4 @@
-import type { CSSObject, Variant } from '@unocss-native/core'
+import type { CSSObject, Variant } from '@unorn/core'
 import { numberRE } from '../utils/handlers/regex'
 
 export function negativePercent(str: string) {

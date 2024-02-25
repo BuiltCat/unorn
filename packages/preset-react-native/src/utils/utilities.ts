@@ -1,11 +1,11 @@
-import { type CSSObject, type DynamicMatcher, type RuleContext, isString } from '@unocss-native/core'
+import { type CSSObject, type DynamicMatcher, type RuleContext, isString } from '@unorn/core'
 import type { Theme } from '../theme'
 import { h } from './handlers'
 import { hexToRGB } from './colors'
 
 export const bracketTypeRe = /^\[(color|length|position|quoted|string):/i
 
-type ThemeColorKeys = 'backgroundColor' | 'colors' | 'textColor'
+type ThemeColorKeys = 'backgroundColor' | 'colors' | 'textColor' | 'borderColor'
 
 export function getStringComponent(str: string, open: string, close: string, separators: string | string[]) {
   if (str === '')
@@ -71,6 +71,10 @@ function getThemeColorForKey(theme: Theme, colors: string[], key: ThemeColorKeys
 
 function getThemeColor(theme: Theme, colors: string[], key?: ThemeColorKeys) {
   return getThemeColorForKey(theme, colors, key) || getThemeColorForKey(theme, colors, 'colors')
+}
+
+export function hasParseableColor(color: string | undefined, theme: Theme, key: ThemeColorKeys) {
+  return color != null && !!parseColor(color, theme, key)?.color
 }
 
 export function splitShorthand(body: string, type: string) {
@@ -205,4 +209,5 @@ export function transformColor(alpha: string | number | undefined, color: string
       return `rgba(${rgb.join(',')},${alpha})`
     }
   }
+  return color
 }

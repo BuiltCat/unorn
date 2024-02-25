@@ -1,4 +1,4 @@
-import type { Variant } from '@unocss-native/core'
+import type { Variant } from '@unorn/core'
 import type { Theme } from '../theme'
 import { variantNegative } from './negative'
 

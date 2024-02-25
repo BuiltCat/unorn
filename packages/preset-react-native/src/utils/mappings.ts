@@ -48,17 +48,9 @@ export const cornerMap: Record<string, ('' | 'TopLeft' | 'BottomLeft' | 'TopRigh
   'e': ['StartEnd', 'EndEnd'],
   'ie': ['StartEnd', 'EndEnd'],
   'ss': ['StartStart'],
-  'bs-is': ['StartStart'],
-  'isBs': ['StartStart'],
   'se': ['StartEnd'],
-  'bs-ie': ['StartEnd'],
-  'ieBs': ['StartEnd'],
   'es': ['EndStart'],
-  'be-is': ['EndStart'],
-  'isBe': ['EndStart'],
   'ee': ['EndEnd'],
-  'be-ie': ['EndEnd'],
-  'ieBe': ['EndEnd'],
 }
 
 export type BorderStyle = 'solid' | 'dotted' | 'dashed'

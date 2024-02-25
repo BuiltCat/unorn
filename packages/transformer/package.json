@@ -1,5 +1,5 @@
 {
-  "name": "@unocss-native/transformer",
+  "name": "@unorn/transformer",
   "version": "0.0.1",
   "description": "",
   "author": "",
@@ -11,7 +11,7 @@
   },
   "devDependencies": {
     "@types/react": "^18.2.25",
-    "@unocss-native/core": "workspace:*",
+    "@unorn/core": "workspace:*",
     "react": "^18.2.0"
   }
 }

@@ -1,5 +1,5 @@
 // import { Rule } from '@unocss/core'
-import type { Rule } from '@unocss-native/core'
+import type { Rule } from '@unorn/core'
 import type { Theme } from '../theme'
 
 export const image: Rule<Theme>[] = [

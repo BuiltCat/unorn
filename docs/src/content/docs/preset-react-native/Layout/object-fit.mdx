@@ -1,0 +1,26 @@
+---
+title: Object Fit
+description: 此属性控制元素与原始图像尺寸不匹配时如何调整图像大小。
+---
+
+import { Card, CardGrid } from '@astrojs/starlight/components';
+
+此属性控制元素与原始图像尺寸不匹配时如何调整图像大小，在`React Native`当中没有`none`这个值。
+
+## 基本使用
+
+使用**object-cove** | **object-contain** | **object-fill** | **object-scale-down**设置元素的objectFit。
+
+```typescript
+'object-cover' -> { objectFit: 'cover' }
+'object-contain' -> { objectFit: 'contain' }
+'object-scale-down' -> { objectFit: 'scale-down' }
+'object-fill' -> { objectFit: 'fill' }
+```
+
+
+## 文档
+
+如果对此属性不熟悉，可以查看React Native的官方文档，链接在这里。
+
+[Image Style Props#objectfit](https://reactnative.dev/docs/image-style-props#objectfit)

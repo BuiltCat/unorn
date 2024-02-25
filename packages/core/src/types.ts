@@ -19,6 +19,9 @@ export interface CSSColorValue {
   components: (string | number)[]
   alpha: string | number | undefined
 }
+
+export type PresetOptions = Record<string, any>
+
 export interface RuleContext<Theme extends object = object> {
   /**
    * Unprocessed selector from user input.
@@ -279,7 +282,36 @@ export interface ConfigBase<Theme extends object = object> {
    * Can be language-aware.
    */
   extractors?: Extractor[]
+
+  /**
+   * Presets
+   */
+  presets?: (PresetOrFactory<Theme> | PresetOrFactory<Theme>[])[]
 }
+
+export interface Preset<Theme extends object = object> extends ConfigBase<Theme> {
+  name: string
+  /**
+   * Enforce the preset to be applied before or after other presets
+   */
+  enforce?: 'pre' | 'post'
+  /**
+   * Preset options for other tools like IDE to consume
+   */
+  options?: PresetOptions
+  /**
+   * Apply prefix to all utilities and shortcuts
+   */
+  prefix?: string | string[]
+  /**
+   * Apply layer to all utilities and shortcuts
+   */
+  layer?: string
+}
+
+export type PresetFactory<Theme extends object = object, PresetOptions extends object | undefined = undefined> = (options?: PresetOptions) => Preset<Theme>
+
+export type PresetOrFactory<Theme extends object = object> = Preset<Theme> | PresetFactory<Theme, any>
 
 export interface USerOnlyOptions<Theme extends object = object> {
   /**

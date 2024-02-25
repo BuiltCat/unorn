@@ -1,0 +1,76 @@
+---
+title: Top / Right / Bottom / Left / Start / End
+description: 此属性控制元素的定位时的位置。
+---
+
+import { Card, CardGrid } from '@astrojs/starlight/components';
+
+此属性控制元素的定位时的位置。
+
+## 基本使用
+
+使用`{top|right|bottom|left|start|end}-{size}`进行设置。
+
+```typescript
+'start-0' -> { start: 0 }
+'end-0' -> { end: 0 }
+'top-0' -> { top: 0 }
+'left-0' -> { left: 0 }
+'right-0' -> { right: 0 }
+'bottom-0' -> { bottom: 0 }
+
+'start-1/2' -> { start: '50%' }
+'end-1/2' -> { end: '50%' }
+'top-1/2' -> { top: '50%' }
+'left-1/2' -> { left: '50%' }
+'right-1/2' -> { right: '50%' }
+'bottom-1/2' -> { bottom: '50%' }
+
+'start-full' -> { start: '100%' }
+'end-full' -> { end: '100%' }
+'top-full' -> { top: '100%' }
+'left-full' -> { left: '100%' }
+'right-full' -> { right: '100%' }
+'bottom-full' -> { bottom: '100%' }
+```
+
+## 自定义
+
+### 自定义主题
+
+默认情况下，该预设只会提供一组基本的主题设置。你可以通过以下方式进行自定义主题。
+
+```diff lang="javascript"
+{
+    theme: {
+        spacing: {
++            'wide': 200
+        },
+    }
+}
+```
+
+### 任意值
+
+在有一些情况下，你可能需要使用没有意义的一次性值，那么使用方括号`[]`定义任意值生成动态属性。
+
+```typescript
+'start-[1]' -> { start: 1 }
+'end-[1]' -> { end: 1 }
+'top-[1]' -> { top: 1 }
+'left-[1]' -> { left: 1 }
+'right-[1]' -> { right: 1 }
+'bottom-[1]' -> { bottom: 1 }
+```
+
+
+## 文档
+
+如果对此属性不熟悉，可以查看React Native的官方文档，链接在这里。
+
+- [Layout Props#top](https://reactnative.dev/docs/layout-props#top)
+- [Layout Props#right](https://reactnative.dev/docs/layout-props#right)
+- [Layout Props#bottom](https://reactnative.dev/docs/layout-props#bottom)
+- [Layout Props#left](https://reactnative.dev/docs/layout-props#left)
+- [Layout Props#start](https://reactnative.dev/docs/layout-props#start)
+- [Layout Props#end](https://reactnative.dev/docs/layout-props#end)

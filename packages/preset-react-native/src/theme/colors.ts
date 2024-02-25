@@ -2,8 +2,6 @@
 // https://github.com/tailwindlabs/tailwindcss/blob/master/src/public/colors.js
 
 export const colors = {
-  inherit: 'inherit',
-  current: 'currentColor',
   transparent: 'transparent',
   black: '#000',
   white: '#fff',

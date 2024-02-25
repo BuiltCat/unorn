@@ -1,26 +1,24 @@
-import type { CSSObject, DynamicMatcher, Rule, RuleContext } from '@unocss-native/core'
+import type { CSSObject, DynamicMatcher, Rule, RuleContext } from '@unorn/core'
 import type { Theme } from '../theme'
 import { h } from '../utils/handlers'
 import { borderDirectionMap, directionMap, sizeMapping } from '../utils/mappings'
-import { parseColor, transformColor } from '../utils/utilities'
+import { hasParseableColor, parseColor, transformColor } from '../utils/utilities'
 
 type BorderProps = 'borderLeftWidth' | 'borderRightWidth'
 
-function getAspectRatio(prop: string) {
-  if (/^\d+\/\d+$/.test(prop))
-    return prop
-
-  switch (prop) {
-    case 'square': return '1/1'
-    case 'video': return '16/9'
-    case 'auto': return 'auto'
+function handleAspectRatio([, a = '']: string[], { theme }: RuleContext<Theme>): CSSObject | undefined {
+  if (/^\d+\/\d+$/.test(a)) {
+    return {
+      aspectRatio: a,
+    }
   }
-
-  return h.bracket(prop)
+  return {
+    aspectRatio: theme.aspectRatio?.[a] ?? h.bracket.number(a),
+  }
 }
 
 function handlerBorderWidth([, a = '', b]: string[], { theme }: RuleContext<Theme>): CSSObject | undefined {
-  const v = theme.borderWidth?.[b || 'DEFAULT'] ?? h.bracket.number(b)
+  const v = theme.borderWidth?.[b || 'DEFAULT'] ?? h.bracket.number(b ?? '1')
   const props: CSSObject = {}
   if (a in borderDirectionMap && v != null) {
     borderDirectionMap[a].forEach((i) => {
@@ -30,24 +28,34 @@ function handlerBorderWidth([, a = '', b]: string[], { theme }: RuleContext<Them
   return props
 }
 
-function handlerBorderColor([, a = '', b]: string[], { theme }: RuleContext<Theme>): CSSObject | undefined {
-  // const v = theme.borderWidth?.[b || 'DEFAULT'] ?? h.bracket.number(b)
-  const props: CSSObject = {}
+function handlerBorderColor([, a = '', b]: string[], ctx: RuleContext<Theme>): CSSObject | undefined {
   if (a in borderDirectionMap) {
+    if (!hasParseableColor(b, ctx.theme, 'borderColor'))
+      return handlerBorderWidth(['', a, b], ctx)
+    const props: CSSObject = {}
     borderDirectionMap[a].forEach((i) => {
-      const data = parseColor(b, theme)
+      const data = parseColor(b, ctx.theme)
       if (!data)
         return
       const color = transformColor(data.alpha, data.color)
       if (color)
         props[`border${i}Color`] = color
     })
+    return props
   }
-  return props
 }
 
 function handleInsetValue(s: string, v: string, { theme }: RuleContext<Theme>): string | number | undefined {
   return theme.spacing?.[v] ?? h.bracket.auto.fraction.number(v)
+}
+
+function handleZIndex([, v = '']: string[], { theme }: RuleContext<Theme>): CSSObject | undefined {
+  const n = theme.zIndex?.[v] ?? h.bracket.number(v)
+  if (typeof n === 'number') {
+    return {
+      zIndex: n,
+    }
+  }
 }
 
 type SizeProps = 'height' | 'width' | 'minHeight' | 'maxHeight' | 'minWidth' | 'maxWidth'
@@ -75,7 +83,7 @@ const directions: Record<string, string> = {
 }
 
 function handleGap([, d = '', s]: string[], { theme }: RuleContext<Theme>) {
-  const v = theme.spacing?.[s] ?? h.bracket.number(s)
+  const v = theme.gap?.[s] ?? theme.spacing?.[s] ?? h.bracket.number(s)
   if (v != null) {
     return {
       [`${directions[d]}gap`.replace(/-(\w)/g, (_, p) => p.toUpperCase())]: v,
@@ -125,12 +133,13 @@ export const layout: Rule<Theme>[] = [
   ['justify-evenly', { justifyContent: 'space-evenly' }],
 
   // aspectRatio
-  [/^aspect-(.+)$/, ([, d]: string[]) => ({ aspectRatio: getAspectRatio(d) })],
+  [/^aspect-(.+)$/, handleAspectRatio],
 
   // borderBottomWidth borderEndWidth borderLeftWidth borderRightWidth borderStartWidth borderTopWidth borderWidth
   [/^(?:border)()(?:-(.+))?$/, handlerBorderWidth],
   [/^(?:border)-([xylrtbse])(?:-(.+))?$/, handlerBorderWidth],
 
+  // borderColor
   [/^(?:border)()(?:-(.+))?$/, handlerBorderColor],
   [/^(?:border)-([xylrtbse])(?:-(.+))?$/, handlerBorderColor],
 
@@ -172,7 +181,7 @@ export const layout: Rule<Theme>[] = [
 
   // flexBasis flexGrow flexShrink
   [/^shrink(?:-(.*))?$/, ([, d = '']) => ({ flexShrink: h.bracket.number(d) ?? 1 })],
-  [/^grow(?:-(.*))?$/, ([, d = '']) => ({ flexGrow: h.bracket.percent.number(d) ?? 1 })],
+  [/^grow(?:-(.*))?$/, ([, d = '']) => ({ flexGrow: h.bracket.number(d) ?? 1 })],
   [/^basis-(.+)$/, ([, d], { theme }) => ({ flexBasis: theme.spacing?.[d] ?? h.bracket.auto.fraction.number(d) })],
 
   // padding
@@ -188,6 +197,5 @@ export const layout: Rule<Theme>[] = [
   [/^m-?([rltbse])(?:-?(-?.+))?$/, directionSize('margin')],
 
   // zIndex
-  [/^z([\d.]+)$/, ([, v], { theme }) => ({ zIndex: theme.zIndex?.[v] ?? h.number(v) })],
-  [/^z-(.+)$/, ([, v], { theme }: RuleContext<Theme>) => ({ zIndex: theme.zIndex?.[v] ?? h.bracket.auto.number(v) })],
+  [/^z-(.+)$/, handleZIndex],
 ]
