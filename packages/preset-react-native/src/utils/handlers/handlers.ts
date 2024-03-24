@@ -45,7 +45,7 @@ export function auto(str: string) {
     return 'auto'
 }
 
-export function fraction(str: string) {
+export function fraction(str: string): `${number}%` | number | undefined {
   if (str === 'full')
     return '100%'
   const [left, right] = str.split('/')
@@ -53,7 +53,7 @@ export function fraction(str: string) {
   if (!Number.isNaN(num)) {
     if (num === 0)
       return 0
-    return `${round(num * 100)}%`
+    return `${Number.parseFloat(round(num * 100))}%`
   }
 }
 

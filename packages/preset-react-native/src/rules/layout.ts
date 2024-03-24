@@ -74,23 +74,6 @@ function getSizeValue(minmax: string, hw: string, theme: Theme, prop: string) {
   return h.bracket.auto.fraction.number(prop)
 }
 
-const directions: Record<string, string> = {
-  '': '',
-  'x': 'column-',
-  'y': 'row-',
-  'col': 'column-',
-  'row': 'row-',
-}
-
-function handleGap([, d = '', s]: string[], { theme }: RuleContext<Theme>) {
-  const v = theme.gap?.[s] ?? theme.spacing?.[s] ?? h.bracket.number(s)
-  if (v != null) {
-    return {
-      [`${directions[d]}gap`.replace(/-(\w)/g, (_, p) => p.toUpperCase())]: v,
-    }
-  }
-}
-
 function directionSize(propertyPrefix: 'margin' | 'padding'): DynamicMatcher {
   return ([_, direction, size]: string[], { theme }: RuleContext<Theme>): CSSObject | undefined => {
     const v = theme.spacing?.[size || 'DEFAULT'] ?? h.bracket.auto.fraction.number(size)
@@ -100,37 +83,6 @@ function directionSize(propertyPrefix: 'margin' | 'padding'): DynamicMatcher {
 }
 
 export const layout: Rule<Theme>[] = [
-
-  // alignContent
-  ['content-center', { alignContent: 'center' }],
-  ['content-start', { alignContent: 'flex-start' }],
-  ['content-end', { alignContent: 'flex-end' }],
-  ['content-between', { alignContent: 'space-between' }],
-  ['content-around', { alignContent: 'space-around' }],
-  ['content-stretch', { alignContent: 'stretch' }],
-
-  // alignItems
-  ['items-start', { alignItems: 'flex-start' }],
-  ['items-end', { alignItems: 'flex-end' }],
-  ['items-center', { alignItems: 'center' }],
-  ['items-baseline', { alignItems: 'baseline' }],
-  ['items-stretch', { alignItems: 'stretch' }],
-
-  // alignSelf
-  ['self-auto', { alignSelf: 'auto' }],
-  ['self-start', { alignSelf: 'flex-start' }],
-  ['self-end', { alignSelf: 'flex-end' }],
-  ['self-center', { alignSelf: 'center' }],
-  ['self-stretch', { alignSelf: 'stretch' }],
-  ['self-baseline', { alignSelf: 'baseline' }],
-
-  // justifyContent
-  ['justify-start', { justifyContent: 'flex-start' }],
-  ['justify-end', { justifyContent: 'flex-end' }],
-  ['justify-center', { justifyContent: 'center' }],
-  ['justify-between', { justifyContent: 'space-between' }],
-  ['justify-around', { justifyContent: 'space-around' }],
-  ['justify-evenly', { justifyContent: 'space-evenly' }],
 
   // aspectRatio
   [/^aspect-(.+)$/, handleAspectRatio],
@@ -150,17 +102,6 @@ export const layout: Rule<Theme>[] = [
   ['flex', { display: 'flex' }],
   ['hidden', { display: 'none' }],
 
-  // Flex Direction
-  ['flex-row', { flexDirection: 'row' }],
-  ['flex-row-reverse', { flexDirection: 'row-reverse' }],
-  ['flex-col', { flexDirection: 'column' }],
-  ['flex-col-reverse', { flexDirection: 'column-reverse' }],
-
-  // Flex Wrap
-  ['flex-wrap', { flexWrap: 'wrap' }],
-  ['flex-wrap-reverse', { flexWrap: 'wrap-reverse' }],
-  ['flex-nowrap', { flexWrap: 'nowrap' }],
-
   // overflow
   ['overflow-visible', { overflow: 'visible' }],
   ['overflow-hidden', { overflow: 'hidden' }],
@@ -173,16 +114,6 @@ export const layout: Rule<Theme>[] = [
   // width height maxHeight minHeight maxWidth minWidth size
   [/^size-(min-|max-)?(.+)$/, ([, m, s], { theme }) => ({ [getPropName(m, 'w')]: getSizeValue(m, 'w', theme, s), [getPropName(m, 'h')]: getSizeValue(m, 'h', theme, s) })],
   [/^(?:size-)?(min-|max-)?([wh])-?(.+)$/, ([, m, w, s], { theme }) => ({ [getPropName(m, w)]: getSizeValue(m, w, theme, s) })],
-
-  // gap columnGap rowGap
-  [/^gap-?()(.+)$/, handleGap],
-  [/^gap-([xy])-?(.+)$/, handleGap],
-  [/^gap-(col|row)-?(.+)$/, handleGap],
-
-  // flexBasis flexGrow flexShrink
-  [/^shrink(?:-(.*))?$/, ([, d = '']) => ({ flexShrink: h.bracket.number(d) ?? 1 })],
-  [/^grow(?:-(.*))?$/, ([, d = '']) => ({ flexGrow: h.bracket.number(d) ?? 1 })],
-  [/^basis-(.+)$/, ([, d], { theme }) => ({ flexBasis: theme.spacing?.[d] ?? h.bracket.auto.fraction.number(d) })],
 
   // padding
   [/^pa?()-?(-?.+)$/, directionSize('padding')],

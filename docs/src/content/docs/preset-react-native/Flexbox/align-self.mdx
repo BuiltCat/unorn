@@ -1,0 +1,27 @@
+---
+title: Align Self
+---
+
+import { Card, CardGrid } from '@astrojs/starlight/components';
+
+`align-self`属性允许单个项目有与其他项目不一样的对齐方式，可覆盖`align-items`属性。默认值为`auto`，表示继承父元素的`align-items`属性，如果没有父元素，则等同于`stretch`。
+
+## 基本使用
+
+使用**self-auto** | **self-start** | **self-end** | **self-center** | **self-stretch** | **self-baseline** 设置元素的`alignItems`。
+
+```typescript
+// alignSelf
+'self-auto' -> { alignSelf: 'auto' }
+'self-start' -> { alignSelf: 'flex-start' }
+'self-end' -> { alignSelf: 'flex-end' }
+'self-center' -> { alignSelf: 'center' }
+'self-stretch' -> { alignSelf: 'stretch' }
+'self-baseline' -> { alignSelf: 'baseline' }
+```
+
+## 文档
+
+如果对此属性不熟悉，可以查看React Native的官方文档，链接在这里。
+
+[Layout Props#alignself](https://reactnative.dev/docs/layout-props#alignself)

@@ -10,6 +10,7 @@
   "main": "index.js",
   "scripts": {
     "docs": "pnpm -C docs run dev",
+    "docs:preview": "pnpm -C docs run preview",
     "test": "vitest",
     "prepare": "husky install",
     "lint": "eslint --cache .",

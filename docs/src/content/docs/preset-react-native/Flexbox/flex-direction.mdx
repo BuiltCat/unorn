@@ -4,15 +4,11 @@ title: Flex Direction
 
 import { Card, CardGrid } from '@astrojs/starlight/components';
 
-![type](https://img.shields.io/badge/type%3A%20row%2C%20string-required%3A%20No-%23DEBCFF?style=for-the-badge&labelColor=%235C19E3)
+`flex-direction`属性决定主轴的方向（即项目的排列方向），`React Native`的默认主轴方向为`column`。
 
+## 基本使用
 
-`flexDirection` controls which directions children of a container go. 
-`row` goes left to right, `column` goes top to bottom, and you may be able to guess what the other two do. 
-It works like `flex-direction` in CSS, except the default is `column`. 
-See [https://developer.mozilla.org/en-US/docs/Web/CSS/flex-direction](https://developer.mozilla.org/en-US/docs/Web/CSS/flex-direction) for more details.
-
-### Basic usage
+使用**flex-row** | **flex-row-reverse** | **flex-col** | **flex-col-reverse** 设置元素的flexDirection。
 
 ```typescript
 'flex-row' -> { flexDirection: 'row' }
@@ -20,3 +16,9 @@ See [https://developer.mozilla.org/en-US/docs/Web/CSS/flex-direction](https://de
 'flex-col' -> { flexDirection: 'column' }
 'flex-col-reverse' -> { flexDirection: 'column-reverse' }
 ```
+
+## 文档
+
+如果对此属性不熟悉，可以查看React Native的官方文档，链接在这里。
+
+[Layout Props#flexdirection](https://reactnative.dev/docs/layout-props#flexdirection)

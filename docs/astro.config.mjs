@@ -6,6 +6,7 @@ export default defineConfig({
   integrations: [
     starlight({
       title: 'UnoRN',
+      favicon: './favicon.png',
       customCss: [
         './src/styles/custom.css',
         '@fontsource/noto-sans/400.css',
@@ -32,4 +33,5 @@ export default defineConfig({
       ],
     }),
   ],
+  
 })

@@ -1,0 +1,26 @@
+---
+title: Align Content
+---
+
+import { Card, CardGrid } from '@astrojs/starlight/components';
+
+`align-content`属性定义了多根轴线的对齐方式。如果项目只有一根轴线，该属性不起作用。
+
+## 基本使用
+
+使用**content-center** | **content-start** | **content-end** | **content-between** | **content-around** | **content-stretch** 设置元素的`alignContent`。
+
+```typescript
+'content-center' -> { alignContent: 'center' }
+'content-start' -> { alignContent: 'flex-start' }
+'content-end' -> { alignContent: 'flex-end' }
+'content-between' -> { alignContent: 'space-between' }
+'content-around' -> { alignContent: 'space-around' }
+'content-stretch' -> { alignContent: 'stretch' }
+```
+
+## 文档
+
+如果对此属性不熟悉，可以查看React Native的官方文档，链接在这里。
+
+[Layout Props#aligncontent](https://reactnative.dev/docs/layout-props#aligncontent)

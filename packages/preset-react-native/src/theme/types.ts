@@ -1,3 +1,5 @@
+import type { DimensionValue } from 'react-native'
+
 export interface Theme {
   aspectRatio?: Record<string, string | number>
   backgroundColor?: Record<string, string | Record<string, string>>
@@ -19,5 +21,10 @@ export interface Theme {
   fontWeight?: Record<string, 'bold' | '100' | '200' | '300' | '400' | '500' | '600' | '700' | '800' | '900' | 'normal'>
   lineHeight?: Record<string, number>
   letterSpacing?: Record<string, number>
-  gap?: Record<string, number>
+  extend?: {
+    flexGrow?: Record<string, number>
+    flexBasis?: Record<string, DimensionValue>
+    flexShrink?: Record<string, number>
+    gap?: Record<string, number>
+  }
 }

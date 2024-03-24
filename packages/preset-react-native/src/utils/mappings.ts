@@ -53,5 +53,13 @@ export const cornerMap: Record<string, ('' | 'TopLeft' | 'BottomLeft' | 'TopRigh
   'ee': ['EndEnd'],
 }
 
+export const directions: Record<string, string> = {
+  '': '',
+  'x': 'column-',
+  'y': 'row-',
+  'col': 'column-',
+  'row': 'row-',
+}
+
 export type BorderStyle = 'solid' | 'dotted' | 'dashed'
 export const borderStyleMap = ['solid', 'dotted', 'dashed']

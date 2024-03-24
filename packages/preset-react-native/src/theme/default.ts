@@ -26,7 +26,9 @@ export const theme: Theme = {
     800: '800',
     900: '900',
   },
-  gap: {
-    px: 1,
+  extend: {
+    gap: {
+      px: 1,
+    },
   },
 }

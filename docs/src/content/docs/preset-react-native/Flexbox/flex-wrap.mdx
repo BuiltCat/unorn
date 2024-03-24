@@ -4,20 +4,20 @@ title: Flex Wrap
 
 import { Card, CardGrid } from '@astrojs/starlight/components';
 
-![type](https://img.shields.io/badge/type%3A%20row%2C%20string-required%3A%20No-%23DEBCFF?style=for-the-badge&labelColor=%235C19E3)
+默认情况下，项目都排在一条线（又称"轴线"）上。`flex-wrap`属性定义，如果一条轴线排不下，如何换行。
 
+## 基本使用
 
-`flexWrap` controls whether children can wrap around after they hit the end of a flex container.
-It works like `flex-wrap` in CSS (default: nowrap). 
-See https://developer.mozilla.org/en-US/docs/Web/CSS/flex-wrap for more details. 
-Note it does not work anymore with `alignItems: stretch` (the default), 
-so you may want to use `alignItems: flex-start` for example 
-(breaking change details: https://github.com/facebook/react-native/releases/tag/v0.28.0).
-
-### Basic usage
+使用**flex-wrap** | **flex-wrap-reverse** | **flex-nowrap** 设置元素的flexWrap。
 
 ```typescript
 'flex-wrap' -> { flexWrap: 'wrap' }
 'flex-wrap-reverse' -> { flexWrap: 'wrap-reverse' }
 'flex-nowrap' -> { flexWrap: 'nowrap' }
 ```
+
+## 文档
+
+如果对此属性不熟悉，可以查看React Native的官方文档，链接在这里。
+
+[Layout Props#flexwrap](https://reactnative.dev/docs/layout-props#flexwrap)

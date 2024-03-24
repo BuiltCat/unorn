@@ -1,0 +1,58 @@
+---
+title: Flex Grow
+---
+
+import { Card, CardGrid } from '@astrojs/starlight/components';
+
+`flex-grow`属性定义项目的放大比例，默认为`0`，即如果存在剩余空间，也不放大。
+
+## 基本使用
+
+使用`grow-{size}`设置元素的`flexGrow`。
+
+```typescript
+'grow' -> { flexGrow: 1 }
+'grow-0' -> { flexGrow: 0 }
+'grow-3' -> { flexGrow: 3 }
+'grow-3.2' -> { flexGrow: 3.2 }
+'grow-[3.2]' -> { flexGrow: 3.2 }
+```
+
+
+## 自定义
+
+### 自定义主题
+
+默认情况下，该预设只会提供一组基本的主题设置。你可以通过以下方式进行自定义主题。
+
+> 设置
+```diff lang="typescript"
+{
+    theme: {
+        extend: {
++           flexGrow: {
++              base: 1
++           },
+        }
+    }
+}
+```
+
+> 使用
+```diff lang="typescript"
+'grow-base' -> { flexGrow: 1 }
+```
+
+### 任意值
+
+在有一些情况下，你可能需要使用没有意义的一次性值，那么使用方括号`[]`定义任意值生成动态属性。
+
+```typescript
+'grow-[2]'  -> { flexGrow: 2 }
+```
+
+## 文档
+
+如果对此属性不熟悉，可以查看React Native的官方文档，链接在这里。
+
+[Layout Props#flexgrow](https://reactnative.dev/docs/layout-props#flexgrow)

@@ -1,0 +1,25 @@
+---
+title: Align Items
+---
+
+import { Card, CardGrid } from '@astrojs/starlight/components';
+
+`align-items`属性定义项目在交叉轴上如何对齐。
+
+## 基本使用
+
+使用**items-start** | **items-end** | **items-center** | **items-baseline** | **items-stretch**设置元素的`alignItems`。
+
+```typescript
+'items-start' -> { alignItems: 'flex-start' }
+'items-end' -> { alignItems: 'flex-end' }
+'items-center' -> { alignItems: 'center' }
+'items-baseline' -> { alignItems: 'baseline' }
+'items-stretch' -> { alignItems: 'stretch' }
+```
+
+## 文档
+
+如果对此属性不熟悉，可以查看React Native的官方文档，链接在这里。
+
+[Layout Props#alignitems](https://reactnative.dev/docs/layout-props#alignitems)

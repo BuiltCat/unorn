@@ -1,0 +1,58 @@
+---
+title: Flex Shrink
+---
+
+import { Card, CardGrid } from '@astrojs/starlight/components';
+
+`flex-shrink`属性定义了项目的缩小比例，默认为`1`，即如果空间不足，该项目将缩小。
+
+## 基本使用
+
+使用`shrink-{size}`设置元素的`flexShrink`。
+
+```typescript
+'shrink' -> { flexShrink: 1 }
+'shrink-0' -> { flexShrink: 0 }
+'shrink-3' -> { flexShrink: 3 }
+'shrink-3.2' -> { flexShrink: 3.2 }
+'shrink-[3.2]' -> { flexShrink: 3.2 }
+```
+
+
+## 自定义
+
+### 自定义主题
+
+默认情况下，该预设只会提供一组基本的主题设置。你可以通过以下方式进行自定义主题。
+
+> 设置
+```diff lang="typescript"
+{
+    theme: {
+        extend: {
++           flexShrink: {
++              base: 1
++           },
+        }
+    }
+}
+```
+
+> 使用
+```diff lang="typescript"
+'shrink-base' -> { flexShrink: 1 }
+```
+
+### 任意值
+
+在有一些情况下，你可能需要使用没有意义的一次性值，那么使用方括号`[]`定义任意值生成动态属性。
+
+```typescript
+'shrink-[2]'  -> { flexShrink: 2 }
+```
+
+## 文档
+
+如果对此属性不熟悉，可以查看React Native的官方文档，链接在这里。
+
+[Layout Props#flexshrink](https://reactnative.dev/docs/layout-props#flexshrink)

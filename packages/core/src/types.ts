@@ -13,7 +13,7 @@ export type RequiredByKey<T, K extends keyof T = keyof T> = FlatObjectTuple<
   Required<Pick<T, Extract<keyof T, K>>> & Omit<T, K>
 >
 
-export type CSSObject = ViewStyle | TextStyle | ImageStyle
+export type CSSObject = any
 export interface CSSColorValue {
   type: string
   components: (string | number)[]

@@ -4,9 +4,11 @@ import { text } from './text'
 import { layout } from './layout'
 import { border } from './border'
 import { image } from './image'
+import { flex } from './flex'
 import { backfaceVisibility, backgroundColor, opacity, pointerEvents } from './view'
 
 export const rules: Rule<Theme>[] = [
+  flex,
   text,
   layout,
   border,
