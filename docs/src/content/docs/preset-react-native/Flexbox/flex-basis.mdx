@@ -26,7 +26,7 @@ import { Card, CardGrid } from '@astrojs/starlight/components';
 
 默认情况下，该预设只会提供一组基本的主题设置。你可以通过以下方式进行自定义主题。
 
-`flex-basis`可以使用`spacing`中的设置，也可以使用`extend.flexBasis`中的设置。
+`flex-basis`可以使用`spacing`中的设置，也可以使用`flexBasis`中的设置。
 
 
 1. 使用`spacing`进行设置。
@@ -35,14 +35,14 @@ import { Card, CardGrid } from '@astrojs/starlight/components';
 ```diff lang="javascript"
 {
     theme: {
-        spacing: {
++        spacing: {
 +           '1/7': '14.2857143%',
 +           '2/7': '28.5714286%',
 +           '3/7': '42.8571429%',
 +           '4/7': '57.1428571%',
 +           '5/7': '71.4285714%',
 +           '6/7': '85.7142857%',
-        },
++        },
     }
 }
 ```
@@ -52,21 +52,19 @@ import { Card, CardGrid } from '@astrojs/starlight/components';
 ```
 
 
-2. 使用`extend.flexBasis`进行设置。
+2. 使用`flexBasis`进行设置。
 > 设置
 ```diff lang="javascript"
 {
     theme: {
-        extend: {
-            flexBasis: {
-+               '1/7': '14.2857143%',
-+               '2/7': '28.5714286%',
-+               '3/7': '42.8571429%',
-+               '4/7': '57.1428571%',
-+               '5/7': '71.4285714%',
-+               '6/7': '85.7142857%',
-            },
-        }
++        flexBasis: {
++           '1/7': '14.2857143%',
++           '2/7': '28.5714286%',
++           '3/7': '42.8571429%',
++           '4/7': '57.1428571%',
++           '5/7': '71.4285714%',
++           '6/7': '85.7142857%',
++        },
     }
 }
 ```

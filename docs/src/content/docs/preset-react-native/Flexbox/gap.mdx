@@ -32,7 +32,7 @@ import { Card, CardGrid } from '@astrojs/starlight/components';
 
 默认情况下，该预设只会提供一组基本的主题设置。你可以通过以下方式进行自定义主题。
 
-`gap`可以使用`spacing`中的设置，也可以使用`extend.gap`中的设置。
+`gap`可以使用`spacing`中的设置，也可以使用`gap`中的设置。
 
 
 1. 使用`spacing`进行设置。
@@ -41,9 +41,9 @@ import { Card, CardGrid } from '@astrojs/starlight/components';
 ```diff lang="javascript"
 {
     theme: {
-        spacing: {
++        spacing: {
 +           'base': 1
-        },
++        },
     }
 }
 ```
@@ -53,16 +53,14 @@ import { Card, CardGrid } from '@astrojs/starlight/components';
 ```
 
 
-2. 使用`extend.gap`进行设置。
+2. 使用`gap`进行设置。
 > 设置
 ```diff lang="javascript"
 {
     theme: {
-        extend: {
-            gap: {
-+               'base': 1
-            },
-        }
++        gap: {
++           'base': 1
++        },
     }
 }
 ```

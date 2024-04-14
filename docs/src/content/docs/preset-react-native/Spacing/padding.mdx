@@ -1,0 +1,136 @@
+---
+title: Padding
+---
+
+import { Card, CardGrid } from '@astrojs/starlight/components';
+
+ `padding`控制元素所有四条边的内边距区域。
+
+## 基本使用
+
+使用`p{x|y|s|e|t|r|b|l}-{size}`设置元素的`padding` | `paddingHorizontal` | 
+`paddingVertical` | `paddingStart` | `paddingEnd` | `paddingTop` |  `paddingRight` |
+`paddingBottom` | `paddingLeft`。
+
+
+```typescript
+'p-0' -> { padding: 0 }
+'p-10' -> { padding: 10 }
+'p-20' -> { padding: 20 }
+'p-30' -> { padding: 30 }
+
+'px-0' -> { paddingHorizontal: 0 }
+'px-10' -> { paddingHorizontal: 10 }
+'px-20' -> { paddingHorizontal: 20 }
+'px-30' -> { paddingHorizontal: 30 }
+
+'py-0' -> { paddingVertical: 0 }
+'py-10' -> { paddingVertical: 10 }
+'py-20' -> { paddingVertical: 20 }
+'py-30' -> { paddingVertical: 30 }
+
+'pt-0' -> { paddingTop: 0 }
+'pt-10' -> { paddingTop: 10 }
+'pt-20' -> { paddingTop: 20 }
+'pt-30' -> { paddingTop: 30 }
+
+'pr-0' -> { paddingRight: 0 }
+'pr-10' -> { paddingRight: 10 }
+'pr-20' -> { paddingRight: 20 }
+'pr-30' -> { paddingRight: 30 }
+
+'pb-0' -> { paddingBottom: 0 }
+'pb-10' -> { paddingBottom: 10 }
+'pb-20' -> { paddingBottom: 20 }
+'pb-30' -> { paddingBottom: 30 }
+
+'pl-0' -> { paddingLeft: 0 }
+'pl-10' -> { paddingLeft: 10 }
+'pl-20' -> { paddingLeft: 20 }
+'pl-30' -> { paddingLeft: 30 }
+
+'ps-0' -> { paddingStart: 0 }
+'ps-10' -> { paddingStart: 10 }
+'ps-20' -> { paddingStart: 20 }
+'ps-30' -> { paddingStart: 30 }
+
+'pe-0' -> { paddingEnd: 0 }
+'pe-10' -> { paddingEnd: 10 }
+'pe-20' -> { paddingEnd: 20 }
+'pe-30' -> { paddingEnd: 30 }
+```
+
+
+## 自定义
+
+### 自定义主题
+
+默认情况下，该预设只会提供一组基本的主题设置。你可以通过以下方式进行自定义主题。
+
+`padding`可以使用`spacing`中的设置，也可以使用`padding`中的设置。
+
+
+1. 使用`spacing`进行设置。
+
+> 设置
+```diff lang="javascript"
+{
+    theme: {
++        spacing: {
++           'base': 1
++        },
+    }
+}
+```
+> 使用
+```diff lang="javascript"
+'p-base' -> { padding: 1 }
+'px-base' -> { paddingHorizontal: 1 }
+'py-base' -> { paddingVertical: 1 }
+'pt-base' -> { paddingTop: 1 }
+'pr-base' -> { paddingRight: 1 }
+'pb-base' -> { paddingBottom: 1 }
+'pl-base' -> { paddingLeft: 1 }
+'ps-base' -> { paddingStart: 1 }
+'pe-base' -> { paddingEnd: 1 }
+```
+
+
+2. 使用`padding`进行设置。
+> 设置
+```diff lang="javascript"
+{
+    theme: {
++        padding: {
++           'xl': 5
++        },
+    }
+}
+```
+> 使用
+```diff lang="javascript"
+
+'p-xl' -> { padding: 5 }
+'px-xl' -> { paddingHorizontal: 5 }
+'py-xl' -> { paddingVertical: 5 }
+'pt-xl' -> { paddingTop: 5 }
+'pr-xl' -> { paddingRight: 5 }
+'pb-xl' -> { paddingBottom: 5 }
+'pl-xl' -> { paddingLeft: 5 }
+'ps-xl' -> { paddingStart: 5 }
+'pe-xl' -> { paddingEnd: 5 }
+```
+
+## 文档
+
+如果对此属性不熟悉，可以查看React Native的官方文档，链接在这里。
+
+- [Layout Props#padding](https://reactnative.dev/docs/layout-props#padding)
+- [Layout Props#paddingbottom](https://reactnative.dev/docs/layout-props#paddingbottom)
+- [Layout Props#paddingend](https://reactnative.dev/docs/layout-props#paddingend)
+- [Layout Props#paddinghorizontal](https://reactnative.dev/docs/layout-props#paddinghorizontal)
+- [Layout Props#paddingleft](https://reactnative.dev/docs/layout-props#paddingleft)
+- [Layout Props#paddingright](https://reactnative.dev/docs/layout-props#paddingright)
+- [Layout Props#paddingstart](https://reactnative.dev/docs/layout-props#paddingstart)
+- [Layout Props#paddingtop](https://reactnative.dev/docs/layout-props#paddingtop)
+- [Layout Props#paddingvertical](https://reactnative.dev/docs/layout-props#paddingvertical)

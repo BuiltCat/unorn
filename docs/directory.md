@@ -52,7 +52,6 @@
     - ✅ marginStart
     - ✅ marginTop
     - ✅ marginVertical
-- 研究 space between
 
 ## Sizing
 - ✅ width - Layout Props

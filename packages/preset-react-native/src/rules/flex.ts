@@ -4,28 +4,28 @@ import { h } from '../utils/handlers'
 import { directions } from '../utils/mappings'
 
 function handleFlexShrink([, d = '']: string[], { theme }: RuleContext<Theme>) {
-  const v = theme.extend?.flexShrink?.[d] ?? h.bracket.auto.fraction.number(d) ?? 1
+  const v = theme?.flexShrink?.[d] ?? h.bracket.auto.fraction.number(d) ?? 1
   return {
     flexShrink: v,
   }
 }
 
 function handleFlexBasis([, d = '']: string[], { theme }: RuleContext<Theme>) {
-  const v = theme.extend?.flexBasis?.[d] ?? theme?.spacing?.[d] ?? h.bracket.auto.fraction.number(d)
+  const v = theme?.flexBasis?.[d] ?? theme?.spacing?.[d] ?? h.bracket.auto.fraction.number(d)
   return {
     flexBasis: v,
   }
 }
 
 function handleFlexGrow([, d = '']: string[], { theme }: RuleContext<Theme>) {
-  const v = theme.extend?.flexGrow?.[d] ?? h.bracket.auto.fraction.number(d) ?? 1
+  const v = theme.flexGrow?.[d] ?? h.bracket.auto.fraction.number(d) ?? 1
   return {
     flexGrow: v,
   }
 }
 
 function handleGap([, d = '', s]: string[], { theme }: RuleContext<Theme>) {
-  const v = theme.extend?.gap?.[s] ?? theme.spacing?.[s] ?? h.bracket.number(s)
+  const v = theme.gap?.[s] ?? theme.spacing?.[s] ?? h.bracket.number(s)
   if (v != null) {
     return {
       [`${directions[d]}gap`.replace(/-(\w)/g, (_, p) => p.toUpperCase())]: v,

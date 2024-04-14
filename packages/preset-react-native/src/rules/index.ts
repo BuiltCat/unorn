@@ -5,7 +5,9 @@ import { layout } from './layout'
 import { border } from './border'
 import { image } from './image'
 import { flex } from './flex'
+import { spacing } from './spacing'
 import { backfaceVisibility, backgroundColor, opacity, pointerEvents } from './view'
+import { size } from './size'
 
 export const rules: Rule<Theme>[] = [
   flex,
@@ -17,4 +19,6 @@ export const rules: Rule<Theme>[] = [
   opacity,
   pointerEvents,
   backgroundColor,
+  spacing,
+  size,
 ].flat(1)

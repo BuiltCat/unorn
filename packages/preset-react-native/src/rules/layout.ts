@@ -1,7 +1,7 @@
-import type { CSSObject, DynamicMatcher, Rule, RuleContext } from '@unorn/core'
+import type { CSSObject, Rule, RuleContext } from '@unorn/core'
 import type { Theme } from '../theme'
 import { h } from '../utils/handlers'
-import { borderDirectionMap, directionMap, sizeMapping } from '../utils/mappings'
+import { borderDirectionMap, sizeMapping } from '../utils/mappings'
 import { hasParseableColor, parseColor, transformColor } from '../utils/utilities'
 
 type BorderProps = 'borderLeftWidth' | 'borderRightWidth'
@@ -58,30 +58,6 @@ function handleZIndex([, v = '']: string[], { theme }: RuleContext<Theme>): CSSO
   }
 }
 
-type SizeProps = 'height' | 'width' | 'minHeight' | 'maxHeight' | 'minWidth' | 'maxWidth'
-
-function getPropName(minmax: string, hw: string) {
-  return `${minmax || ''}${sizeMapping[hw]}`.replace(/-(\w)/g, (_, p) => p.toUpperCase()) as SizeProps
-}
-
-function getSizeValue(minmax: string, hw: string, theme: Theme, prop: string) {
-  const str = getPropName(minmax, hw)
-  const v = theme[str]?.[prop]
-
-  if (v != null)
-    return v
-
-  return h.bracket.auto.fraction.number(prop)
-}
-
-function directionSize(propertyPrefix: 'margin' | 'padding'): DynamicMatcher {
-  return ([_, direction, size]: string[], { theme }: RuleContext<Theme>): CSSObject | undefined => {
-    const v = theme.spacing?.[size || 'DEFAULT'] ?? h.bracket.auto.fraction.number(size)
-    if (v != null)
-      return { [`${propertyPrefix}${directionMap[direction]}`]: v }
-  }
-}
-
 export const layout: Rule<Theme>[] = [
 
   // aspectRatio
@@ -110,22 +86,6 @@ export const layout: Rule<Theme>[] = [
   // position
   ['absolute', { position: 'absolute' }],
   ['relative', { position: 'relative' }],
-
-  // width height maxHeight minHeight maxWidth minWidth size
-  [/^size-(min-|max-)?(.+)$/, ([, m, s], { theme }) => ({ [getPropName(m, 'w')]: getSizeValue(m, 'w', theme, s), [getPropName(m, 'h')]: getSizeValue(m, 'h', theme, s) })],
-  [/^(?:size-)?(min-|max-)?([wh])-?(.+)$/, ([, m, w, s], { theme }) => ({ [getPropName(m, w)]: getSizeValue(m, w, theme, s) })],
-
-  // padding
-  [/^pa?()-?(-?.+)$/, directionSize('padding')],
-  [/^p-?xy()()$/, directionSize('padding')],
-  [/^p-?([xy])(?:-?(-?.+))?$/, directionSize('padding')],
-  [/^p-?([rltbse])(?:-?(-?.+))?$/, directionSize('padding')],
-
-  // marigns
-  [/^ma?()-?(-?.+)$/, directionSize('margin')],
-  [/^m-?xy()()$/, directionSize('margin')],
-  [/^m-?([xy])(?:-?(-?.+))?$/, directionSize('margin')],
-  [/^m-?([rltbse])(?:-?(-?.+))?$/, directionSize('margin')],
 
   // zIndex
   [/^z-(.+)$/, handleZIndex],
