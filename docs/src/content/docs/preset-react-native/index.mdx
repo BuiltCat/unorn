@@ -1,0 +1,64 @@
+---
+title: 介绍
+---
+
+import { Tabs, TabItem, LinkCard } from '@astrojs/starlight/components';
+import Support from '../../../components/support.astro'
+import supports from '../../../assets/support.json'
+
+
+React Native Preset为你提供 [React Native](https://reactnative.dev/) 的相关设置，也是Unorn的默认预设。
+
+
+<LinkCard title="Source Code" href="https://github.com/BuiltCat/unocss-native/tree/main/packages/preset-react-native" />
+
+### 安装
+
+<Tabs>
+<TabItem label="pnpm">
+```sh
+pnpm install @unorn/preset-react-native
+```
+</TabItem>
+<TabItem label="npm">
+```sh 
+npm install @unorn/preset-react-native
+```
+</TabItem>
+<TabItem label="yarn">
+```sh 
+yarn add @unorn/preset-react-native
+```
+</TabItem>
+</Tabs>
+
+``` typescript
+import presetReactNative from '@unorn/preset-react-native'
+
+export default defineConfig({
+  presets: [
+    presetReactNative(),
+  ],
+})
+```
+
+### 参考
+
+此预设的大部分声明参考 [tailwindcss](https://tailwindcss.com/)，大部分规则与 [tailwindcss](https://tailwindcss.com/) 一致。
+
+
+### 支持
+
+当前支持的 [React Native](https://reactnative.dev/) 版本为`0.73`。
+
+<Tabs>
+{Object.keys(supports).map(key => 
+  (<TabItem label={key}>
+    <div style="display: flex;flex-direction: row;flex-wrap: wrap;">
+      {Object.keys(supports[key]).map(s => 
+        (<Support attribute={s} support={supports[key][s]} />)
+      )}
+    </div>
+  </TabItem>)
+)}
+</Tabs>

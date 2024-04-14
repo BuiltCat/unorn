@@ -1,0 +1,67 @@
+---
+title: Width
+---
+
+import { Card, CardGrid } from '@astrojs/starlight/components';
+
+ `width`属性用于设置元素的宽度。
+
+## 基本使用
+
+使用`w-{size}`设置元素的`width`。
+
+
+```typescript
+'w-0' -> { width: 0 }
+'w-0.5' -> { width: 0.5 }
+'w-1/2' -> { width: '50%' }
+```
+
+
+## 自定义
+
+### 自定义主题
+
+默认情况下，该预设只会提供一组基本的主题设置。你可以通过以下方式进行自定义主题。
+
+`width`可以使用`spacing`中的设置，也可以使用`width`中的设置。
+
+
+1. 使用`spacing`进行设置。
+
+> 设置
+```diff lang="javascript"
+{
+    theme: {
++        spacing: {
++           'base': 1
++        },
+    }
+}
+```
+> 使用
+```diff lang="javascript"
+'w-base' -> { width: 1 }
+```
+
+2. 使用`width`进行设置。
+> 设置
+```diff lang="javascript"
+{
+    theme: {
++        widht: {
++           'xl': 5
++        },
+    }
+}
+```
+> 使用
+```diff lang="javascript"
+'w-xl' -> { width: 5 }
+```
+
+## 文档
+
+如果对此属性不熟悉，可以查看React Native的官方文档，链接在这里。
+
+- [Layout Props#width](https://reactnative.dev/docs/layout-props#width)

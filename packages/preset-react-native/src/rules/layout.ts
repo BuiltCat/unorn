@@ -1,91 +1,92 @@
-import { CSSValue, Rule, RuleContext } from "@unocss-native/core";
-import { Theme } from "../theme";
-import { h } from "../utils/handlers";
-import { borderDirectionMap } from "../utils/mappings";
+import type { CSSObject, Rule, RuleContext } from '@unorn/core'
+import type { Theme } from '../theme'
+import { h } from '../utils/handlers'
+import { borderDirectionMap, sizeMapping } from '../utils/mappings'
+import { hasParseableColor, parseColor, transformColor } from '../utils/utilities'
 
-const getAspectRatio = (prop: string) => {
-    if (/^\d+\/\d+$/.test(prop))
-        return prop
+type BorderProps = 'borderLeftWidth' | 'borderRightWidth'
 
-    switch (prop) {
-        case 'square': return '1/1'
-        case 'video': return '16/9'
-        case 'auto': return 'auto'
+function handleAspectRatio([, a = '']: string[], { theme }: RuleContext<Theme>): CSSObject | undefined {
+  if (/^\d+\/\d+$/.test(a)) {
+    return {
+      aspectRatio: a,
     }
-
-    return h.bracket(prop)
+  }
+  return {
+    aspectRatio: theme.aspectRatio?.[a] ?? h.bracket.number(a),
+  }
 }
 
-function handlerBorderWidth([, a = '', b]: string[], { theme }: RuleContext<Theme>): CSSValue | undefined {
-    const v = theme.borderWidth?.[b || 'DEFAULT'] ?? h.bracket.number(b)
-    const props: CSSValue = {}
-    if (a in borderDirectionMap && v != null)
-        borderDirectionMap[a].forEach(i => {
-            props[`border${i}Width`] = v
-        })
+function handlerBorderWidth([, a = '', b]: string[], { theme }: RuleContext<Theme>): CSSObject | undefined {
+  const v = theme.borderWidth?.[b || 'DEFAULT'] ?? h.bracket.number(b ?? '1')
+  const props: CSSObject = {}
+  if (a in borderDirectionMap && v != null) {
+    borderDirectionMap[a].forEach((i) => {
+      props[`border${i}Width` as BorderProps] = v
+    })
+  }
+  return props
+}
+
+function handlerBorderColor([, a = '', b]: string[], ctx: RuleContext<Theme>): CSSObject | undefined {
+  if (a in borderDirectionMap) {
+    if (!hasParseableColor(b, ctx.theme, 'borderColor'))
+      return handlerBorderWidth(['', a, b], ctx)
+    const props: CSSObject = {}
+    borderDirectionMap[a].forEach((i) => {
+      const data = parseColor(b, ctx.theme)
+      if (!data)
+        return
+      const color = transformColor(data.alpha, data.color)
+      if (color)
+        props[`border${i}Color`] = color
+    })
     return props
+  }
 }
 
 function handleInsetValue(s: string, v: string, { theme }: RuleContext<Theme>): string | number | undefined {
-    return theme.spacing?.[v] ?? h.bracket.auto.fraction.number(v)
+  return theme.spacing?.[v] ?? h.bracket.auto.fraction.number(v)
 }
-  
-//   function handleInsetValues([, d, v]: string[], ctx: RuleContext): CSSValue | undefined {
-//     const r = handleInsetValue(v, ctx)
-//     if (r != null && d in insetMap)
-//       return insetMap[d].map(i => [i.slice(1), r])
-//   }
-  
+
+function handleZIndex([, v = '']: string[], { theme }: RuleContext<Theme>): CSSObject | undefined {
+  const n = theme.zIndex?.[v] ?? h.bracket.number(v)
+  if (typeof n === 'number') {
+    return {
+      zIndex: n,
+    }
+  }
+}
 
 export const layout: Rule<Theme>[] = [
 
-    // alignContent
-    ['content-center', { alignContent: 'center' }],
-    ['content-start', { alignContent: 'flex-start' }],
-    ['content-end', { alignContent: 'flex-end' }],
-    ['content-between', { alignContent: 'space-between' }],
-    ['content-around', { alignContent: 'space-around' }],
-    ['content-stretch', { alignContent: 'stretch' }],
+  // aspectRatio
+  [/^aspect-(.+)$/, handleAspectRatio],
 
-    // alignItems
-    ['items-start', { alignItems: 'flex-start' }],
-    ['items-end', { alignItems: 'flex-end' }],
-    ['items-center', { alignItems: 'center' }],
-    ['items-baseline', { alignItems: 'baseline' }],
-    ['items-stretch', { alignItems: 'stretch' }],
+  // borderBottomWidth borderEndWidth borderLeftWidth borderRightWidth borderStartWidth borderTopWidth borderWidth
+  [/^(?:border)()(?:-(.+))?$/, handlerBorderWidth],
+  [/^(?:border)-([xylrtbse])(?:-(.+))?$/, handlerBorderWidth],
 
-    // alignSelf
-    ['self-auto', { alignSelf: 'auto' }],
-    ['self-start', { alignSelf: 'flex-start' }],
-    ['self-end', { alignSelf: 'flex-end' }],
-    ['self-center', { alignSelf: 'center' }],
-    ['self-stretch', { alignSelf: 'stretch' }],
-    ['self-baseline', { alignSelf: 'baseline' }],
+  // borderColor
+  [/^(?:border)()(?:-(.+))?$/, handlerBorderColor],
+  [/^(?:border)-([xylrtbse])(?:-(.+))?$/, handlerBorderColor],
 
-    // aspectRatio
-    [/^aspect-(.+)$/, ([, d]: string[]) => ({ aspectRatio: getAspectRatio(d) })],
+  // top left right bottom start end
+  [/^(-?)(top|left|right|bottom|start|end)-(.+)$/, ([, s, d, v], ctx) => ({ [d]: handleInsetValue(s, v, ctx) })],
 
-    // borderBottomWidth borderEndWidth borderLeftWidth borderRightWidth borderStartWidth borderTopWidth borderWidth
-    [/^(?:border)()(?:-(.+))?$/, handlerBorderWidth],
-    [/^(?:border)-([xylrtbse])(?:-(.+))?$/, handlerBorderWidth],
+  // display
+  ['flex', { display: 'flex' }],
+  ['hidden', { display: 'none' }],
 
-    // bottom
-    [/^(-?)(top|left|right|bottom)-(.+)$/, ([, s, d, v], ctx) => ({ [d]: handleInsetValue(s, v, ctx) })],
+  // overflow
+  ['overflow-visible', { overflow: 'visible' }],
+  ['overflow-hidden', { overflow: 'hidden' }],
+  ['overflow-scroll', { overflow: 'scroll' }],
 
-    ['flex', { display: 'flex' }],
+  // position
+  ['absolute', { position: 'absolute' }],
+  ['relative', { position: 'relative' }],
 
-    // Flex Direction
-    ['flex-row', { flexDirection: 'row' }],
-    ['flex-row-reverse', { flexDirection: 'row-reverse' }],
-    ['flex-col', { flexDirection: 'column' }],
-    ['flex-col-reverse', { flexDirection: 'column-reverse' }],
-
-    // Flex Wrap
-    ['flex-wrap', { flexWrap: 'wrap' }],
-    ['flex-wrap-reverse', { flexWrap: 'wrap-reverse' }],
-    ['flex-nowrap', { flexWrap: 'nowrap' }],
-
-    // zIndex
-    [/^z([\d.]+)$/, ([, v]) => ({ zIndex: h.number(v) })],
-    [/^z-(.+)$/, ([, v], { theme }: RuleContext<Theme>) => ({ zIndex: theme.zIndex?.[v] ?? h.bracket.auto.number(v) })],
+  // zIndex
+  [/^z-(.+)$/, handleZIndex],
 ]

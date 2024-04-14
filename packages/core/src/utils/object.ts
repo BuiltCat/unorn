@@ -1,5 +1,5 @@
-import { isString } from ".";
-import { DeepPartial, Rule, StaticRule } from "../types";
+import type { DeepPartial, Rule, StaticRule } from '../types'
+import { isString } from '.'
 
 export function isObject(item: any): item is Record<string, any> {
   return (item && typeof item === 'object' && !Array.isArray(item))
@@ -64,5 +64,5 @@ export function clone<T>(val: T): T {
 }
 
 export function isStaticRule(rule: Rule<any>): rule is StaticRule {
-  return isString(rule[0]);
+  return isString(rule[0])
 }

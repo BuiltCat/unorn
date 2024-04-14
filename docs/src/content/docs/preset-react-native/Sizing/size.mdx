@@ -1,0 +1,64 @@
+---
+title: Size
+---
+
+import { Card, CardGrid } from '@astrojs/starlight/components';
+
+ `size`属性用于设置元素的高度和宽度。
+
+## 基本使用
+
+使用`size-{size}`设置元素的`height`和`width`。
+
+
+```typescript
+'size-0' -> { width: 0, height: 0 }
+'size-0.5' -> { width: 0.5, height: 0.5 }
+'size-1/2' -> { width: '50%', height: '50%' }
+```
+
+
+## 自定义
+
+### 自定义主题
+
+默认情况下，该预设只会提供一组基本的主题设置。你可以通过以下方式进行自定义主题。
+
+`size`可以使用`spacing`中的设置，也可以使用`height`和`width`的设置。
+
+
+1. 使用`spacing`进行设置。
+
+> 设置
+```diff lang="javascript"
+{
+    theme: {
++        spacing: {
++           'base': 1
++        },
+    }
+}
+```
+> 使用
+```diff lang="javascript"
+'size-base' -> { width: 1, height: 1 }
+```
+
+2. 使用`height`进行设置。
+> 设置
+```diff lang="javascript"
+{
+    theme: {
++        height: {
++           'xl': 5
++        },
++        width: {
++           'xl': 5
++        }
+    }
+}
+```
+> 使用
+```diff lang="javascript"
+'size-xl' -> { width: 5, height: 5 }
+```

@@ -1,0 +1,31 @@
+---
+interface Props {
+    classes: {
+        className: string
+        properties: string
+    }[]
+}
+
+const { classes = [] } = Astro.props
+---
+<div class="table">
+    {classes.map(({ className, properties}) => <div class="table-item">
+        <div>{ className}</div>
+        <div>{properties}</div>
+    </div>)}
+</div>
+
+<style>
+    .table {
+        margin-top: 1rem;
+        padding-left: 20px;
+        padding-right: 20px;
+    }
+
+    .table > .table-item {
+        display: flex;
+        flex-direction: row;
+        justify-content: space-between;
+        align-items: center;
+    }
+</style>

@@ -1,0 +1,26 @@
+---
+title: Justify Content
+---
+
+import { Card, CardGrid } from '@astrojs/starlight/components';
+
+`justify-content`属性定义了项目在主轴上的对齐方式。
+
+## 基本使用
+
+使用**justify-start** | **justify-end** | **justify-center** | **justify-between** | **justify-around** | **justify-evenly** 设置元素的`justifyContent`。
+
+```typescript
+'justify-start' -> { justifyContent: 'flex-start' }
+'justify-end' -> { justifyContent: 'flex-end' }
+'justify-center' -> { justifyContent: 'center' }
+'justify-between' -> { justifyContent: 'space-between' }
+'justify-around' -> { justifyContent: 'space-around' }
+'justify-evenly' -> { justifyContent: 'space-evenly' }
+```
+
+## 文档
+
+如果对此属性不熟悉，可以查看React Native的官方文档，链接在这里。
+
+[Layout Props#justifycontent](https://reactnative.dev/docs/layout-props#justifycontent)

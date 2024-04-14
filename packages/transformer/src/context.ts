@@ -1,3 +1,3 @@
-import { createContext } from 'react';
+import { createContext } from 'react'
 
-export const UnContext = createContext((str: string): Record<string, unknown> => ({} as Record<string, unknown>));
+export const UnContext = createContext((str: string): Record<string, unknown> => ({} as Record<string, unknown>))

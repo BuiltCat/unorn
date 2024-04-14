@@ -1,0 +1,28 @@
+---
+title: Overflow
+description: 此属性控制当元素的内容超过容器大小时，元素如何显示。
+---
+
+import { Card, CardGrid } from '@astrojs/starlight/components';
+
+此属性控制当元素的内容超过容器大小时，元素如何显示。在`React Native`中`overflow`的值只有`visible`、`hidden`与`scroll`，并在`Image Style Props`中只有`visible`和`hidden`两种值。
+
+## 基本使用
+
+使用**overflow-visible** | **overflow-hidden** | **overflow-scroll**设置元素的overflow。
+
+```typescript
+'overflow-visible' -> { overflow: 'visible' }
+'overflow-hidden' -> { overflow: 'hidden' }
+'overflow-scroll' -> { overflow: 'scroll' }
+```
+
+
+
+
+## 文档
+
+如果对此属性不熟悉，可以查看React Native的官方文档，链接在这里。
+
+- [Layout Props#overflow](https://reactnative.dev/docs/layout-props#overflow)
+- [Image Style Props#overflow](https://reactnative.dev/docs/image-style-props#overflow)

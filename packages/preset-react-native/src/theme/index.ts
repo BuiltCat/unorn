@@ -1,3 +1,3 @@
-export * from './colors';
-export * from './default';
-export * from './types';
+export * from './colors'
+export * from './default'
+export * from './types'

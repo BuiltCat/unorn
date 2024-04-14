@@ -1,0 +1,67 @@
+---
+title: Min Height
+---
+
+import { Card, CardGrid } from '@astrojs/starlight/components';
+
+ `min-height`属性用于设置元素的最大高度。
+
+## 基本使用
+
+使用`min-h-{size}`设置元素的`minHeight`。
+
+
+```typescript
+'min-h-0' -> { minHeight: 0 }
+'min-h-0.5' -> { minHeight: 0.5 }
+'min-h-1/2' -> { minHeight: '50%' }
+```
+
+
+## 自定义
+
+### 自定义主题
+
+默认情况下，该预设只会提供一组基本的主题设置。你可以通过以下方式进行自定义主题。
+
+`minHeight`可以使用`spacing`中的设置，也可以使用`minHeight`中的设置。
+
+
+1. 使用`spacing`进行设置。
+
+> 设置
+```diff lang="javascript"
+{
+    theme: {
++        spacing: {
++           'base': 1
++        },
+    }
+}
+```
+> 使用
+```diff lang="javascript"
+'min-h-base' -> { minHeight: 1 }
+```
+
+2. 使用`minHeight`进行设置。
+> 设置
+```diff lang="javascript"
+{
+    theme: {
++        minHeight: {
++           'xl': 5
++        },
+    }
+}
+```
+> 使用
+```diff lang="javascript"
+'min-h-xl' -> { minHeight: 5 }
+```
+
+## 文档
+
+如果对此属性不熟悉，可以查看React Native的官方文档，链接在这里。
+s
+- [Layout Props#minHeight](https://reactnative.dev/docs/layout-props#minHeight)
