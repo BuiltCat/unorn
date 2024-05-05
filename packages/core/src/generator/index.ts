@@ -185,6 +185,7 @@ export class UnoGenerator<Theme extends object = object> {
     const variants = new Set<Variant<Theme>>()
     const handlers: VariantHandler[] = []
 
+    let processed = raw
     let applied = true
 
     const context: VariantContext<Theme> = {
@@ -198,14 +199,15 @@ export class UnoGenerator<Theme extends object = object> {
       for (const v of this.config.variants) {
         if (!v.multiPass && variants.has(v))
           continue
-        let handler = await v.match(raw, context)
+        let handler = await v.match(processed, context)
         if (!handler)
           continue
         if (isString(handler)) {
-          if (handler === raw)
+          if (handler === processed)
             continue
           handler = { matcher: handler }
         }
+        processed = handler.matcher
         handlers.unshift(handler)
         variants.add(v)
         applied = true
@@ -218,7 +220,7 @@ export class UnoGenerator<Theme extends object = object> {
         throw new Error(`Too many variants applied to "${raw}"`)
     }
 
-    return [raw, raw, handlers, variants]
+    return [raw, processed, handlers, variants]
   }
 
   private applyVariants(

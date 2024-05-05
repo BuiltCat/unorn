@@ -1,0 +1,56 @@
+---
+title: Opacity
+---
+
+import { Card, CardGrid } from '@astrojs/starlight/components';
+
+ `opacity`控制元素的透明度。
+
+## 基本使用
+
+使用`opacity-{size}`设置元素的`fontSize`。
+
+
+```typescript
+'opacity-0' -> { opacity: 0 }
+'opacity-5' -> { opacity: 0.05 }
+'opacity-10' -> { opacity: 0.10 }
+'opacity-20' -> { opacity: 0.20 }
+'opacity-50' -> { opacity: 0.50 }
+'opacity-100' -> { opacity: 1.00 }
+```
+
+
+## 自定义
+
+### 自定义主题
+
+默认情况下，该预设只会提供一组基本的主题设置。你可以通过以下方式进行自定义主题。
+
+`opacity`可以使用`opacity`进行设置。
+
+
+1. 使用`opacity`进行设置。
+
+> 设置
+```diff lang="javascript"
+{
+    theme: {
++        opacity: {
++           'easy': 0.66
++        },
+    }
+}
+```
+> 使用
+```diff lang="javascript"
+'opacity-easy' -> { opacity: 0.66 }
+```
+
+
+## 文档
+
+如果对此属性不熟悉，可以查看React Native的官方文档，链接在这里。
+
+- [View Style Props#opacity](https://reactnative.dev/docs/view-style-props#opacity)
+- [Image Style Props#opacity](https://reactnative.dev/docs/image-style-props#opacity)

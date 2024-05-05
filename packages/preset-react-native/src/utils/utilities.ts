@@ -195,9 +195,10 @@ export function colorResolver(property:
     const { alpha, color } = data
 
     const tColor = transformColor(alpha, color)
-
-    return {
-      [property]: tColor ?? color,
+    if (tColor || color) {
+      return {
+        [property]: tColor ?? color,
+      }
     }
   }
 }
@@ -210,4 +211,13 @@ export function transformColor(alpha: string | number | undefined, color: string
     }
   }
   return color
+}
+
+export function getThemeBykey(theme: Theme, key: keyof Theme, body: string) {
+  const value = theme[key]?.[body]
+  if (value) {
+    return {
+      [key]: value,
+    }
+  }
 }

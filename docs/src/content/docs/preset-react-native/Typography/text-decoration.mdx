@@ -1,0 +1,25 @@
+---
+title: Text Decoration
+---
+
+import { Card, CardGrid } from '@astrojs/starlight/components';
+
+ `textDecorationLine`用来设置文本的装饰性线条。
+
+## 基本使用
+
+使用`underline | line-through | underline-through | no-underline`设置元素的`textDecorationLine`。
+
+
+```typescript
+'underline'  ->  { textDecorationLine: 'underline' }
+'line-through'  ->  { textDecorationLine: 'line-through' }
+'underline-through'  ->  { textDecorationLine: 'underline line-through' }
+'no-underline'  ->  { textDecorationLine: 'none' }
+```
+
+## 文档
+
+如果对此属性不熟悉，可以查看React Native的官方文档，链接在这里。
+
+- [Text Style Props#textdecorationline](https://reactnative.dev/docs/text-style-props#textdecorationline)

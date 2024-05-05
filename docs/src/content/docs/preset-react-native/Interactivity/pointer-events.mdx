@@ -1,0 +1,25 @@
+---
+title: Pointer Events
+---
+
+import { Card, CardGrid } from '@astrojs/starlight/components';
+
+ `pointerEvents`用来设置元素是否可以成为触摸事件的目标。
+
+## 基本使用
+
+使用`pointer-events-none | pointer-events-auto | pointer-events-box-none | pointer-events-box-only`设置元素的`pointerEvents`。
+
+
+```typescript
+'pointer-events-none' ->  { pointerEvents: 'none' }
+'pointer-events-auto' ->  { pointerEvents: 'auto' }
+'pointer-events-box-none' ->  { pointerEvents: 'box-none' }
+'pointer-events-box-only' ->  { pointerEvents: 'box-only' }
+```
+
+## 文档
+
+如果对此属性不熟悉，可以查看React Native的官方文档，链接在这里。
+
+- [View Style Props#pointerevents](https://reactnative.dev/docs/view-style-props#pointerevents)

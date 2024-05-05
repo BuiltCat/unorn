@@ -27,4 +27,5 @@ export interface Theme {
   gap?: Record<string, number>
   padding?: Record<string, number>
   margin?: Record<string, number>
+  opacity?: Record<string, number>
 }

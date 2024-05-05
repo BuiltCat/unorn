@@ -1,7 +1,7 @@
 import type { CSSObject, Rule, RuleContext } from '@unorn/core'
 import type { Theme } from '../theme'
 import { h } from '../utils/handlers'
-import { borderDirectionMap, sizeMapping } from '../utils/mappings'
+import { borderDirectionMap } from '../utils/mappings'
 import { hasParseableColor, parseColor, transformColor } from '../utils/utilities'
 
 type BorderProps = 'borderLeftWidth' | 'borderRightWidth'

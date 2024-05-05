@@ -6,7 +6,6 @@
 import type { CSSObject, Rule } from '@unorn/core'
 import type { Theme } from '../theme'
 import { colorResolver } from '../utils/utilities'
-import { h } from '../utils/handlers'
 
 /**
  * @example backface-hidden backface-visible
@@ -32,18 +31,4 @@ export const backfaceVisibility: Rule<Theme>[] = [
  */
 export const backgroundColor: Rule<Theme>[] = [
   [/^bg-(.+)$/, colorResolver('backgroundColor', 'backgroundColor')],
-]
-
-/**
- * @example opacity-100
- */
-export const opacity: Rule<Theme>[] = [
-  [/^opacity-(.+)$/, ([, d]) => ({ opacity: h.bracket.percent(d) })],
-]
-
-export const pointerEvents: Rule<Theme>[] = [
-  ['pointer-events-none', { pointerEvents: 'none' }],
-  ['pointer-events-none', { pointerEvents: 'auto' }],
-  ['pointer-events-box-none', { pointerEvents: 'box-none' }],
-  ['pointer-events-box-only', { pointerEvents: 'box-only' }],
 ]
