@@ -1,10 +1,7 @@
-// import { Rule } from '@unocss/core'
 import type { CSSObject, Rule, RuleContext } from '@unorn/core'
 import type { Theme } from '../theme'
 import { h } from '../utils/handlers'
-import { colorResolver } from '../utils/utilities'
-
-// import {  handler as h } from '@unocss/preset-mini/utils'
+import { colorResolver, getThemeBykey } from '../utils/utilities'
 
 export const numberWithUnitRE = /^(-?\d*(?:\.\d+)?)(px|pt|pc|%|r?(?:em|ex|lh|cap|ch|ic)|(?:[sld]?v|cq)(?:[whib]|min|max)|in|cm|mm|rpx)?$/i
 export const numberRE = /^(-?\d*(?:\.\d+)?)$/i
@@ -26,7 +23,7 @@ function handleSize([, s]: string[], { theme }: RuleContext<Theme>): CSSObject |
 }
 
 function handleThemeByKey(s: string, theme: Theme, key: 'lineHeight' | 'letterSpacing') {
-  return theme[key]?.[s] || h.bracket.number(s)
+  return theme[key]?.[s] ?? h.bracket.number(s)
 }
 
 export const text: Rule<Theme>[] = [
@@ -44,7 +41,7 @@ export const text: Rule<Theme>[] = [
   // fontWeight
   [
     /^(?:font)-?([^-]+)$/,
-    ([, s], { theme }) => ({ fontWeight: theme.fontWeight?.[s] }),
+    ([, d], { theme }) => getThemeBykey(theme, 'fontWeight', d),
   ],
 
   // lineHeight
@@ -78,17 +75,9 @@ export const text: Rule<Theme>[] = [
   ['underline-through', { textDecorationLine: 'underline line-through' }],
   ['no-underline', { textDecorationLine: 'none' }],
 
-  // userSelect
-  ['select-none', { userSelect: 'none' }],
-  ['select-text', { userSelect: 'text' }],
-  ['select-all', { userSelect: 'all' }],
-  ['select-auto', { userSelect: 'auto' }],
-  ['select-contain', { userSelect: 'contain' }],
+  // fontFamily
+  [
+    /^font-(.+)$/,
+    ([, d], { theme }) => getThemeBykey(theme, 'fontFamily', d),
+  ],
 ]
-// export const fontFamily: Rule<Theme>[] = [
-//     [
-//         /^font-(.+)$/,
-//         ([, d], { theme }) => ({ 'font-family': theme.fontFamily?.[d] || h.bracket.cssvar.global(d) }),
-//         { autocomplete: 'font-$fontFamily' },
-//     ]
-// ]

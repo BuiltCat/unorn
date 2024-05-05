@@ -1,6 +1,6 @@
 # directory
 
-## Layout
+## （√）Layout
 - ✅ aspectRatio - View Style Props
 - ✅ display - Layout Props
 - ✅ objectFit - Image Style Props
@@ -15,7 +15,7 @@
     - ✅ end
 - ✅ zIndex  Layout Props
 
-## Flexbox & Grid
+## （√）Flexbox & Grid
 - ✅ flexBasis - Layout Props
 - ✅ flexDirection - Layout Props
 - ✅ flexWrap - Layout Props
@@ -31,7 +31,7 @@
 - ✅ alignItems - Layout Props
 - ✅ alignSelf - Layout Props
 
-## Spaceing
+## （√）Spaceing
 - Padding - Layout Props
     - ✅ padding
     - ✅ paddingBottom
@@ -53,17 +53,17 @@
     - ✅ marginTop
     - ✅ marginVertical
 
-## Sizing
+## （√）Sizing
 - ✅ width - Layout Props
 - ✅ minWidth - Layout Props
 - ✅ maxWidth - Layout Props
 - ✅ height - Layout Props
 - ✅ maxHeight - Layout Props
 - ✅ minHeight - Layout Props
-- 研究 size
+- ✅ size
 
-## Typography
-- ❌ fontFamily - Text Style Props
+## （√）Typography
+- ✅ fontFamily - Text Style Props
 - ✅ fontSize - Text Style Props
 - ✅ fontStyle - Text Style Props
 - ✅ fontWeight - Text Style Props
@@ -71,7 +71,7 @@
 - ✅ letterSpacing - Text Style Props
 - ✅ lineHeight - Text Style Props
 - ✅ textAlign - Text Style Props
-- ✅ color - Text Style Props
+- ✅ color - Text Style Props（×）
 - ✅ textDecorationLine - Text Style Props
 - ❌ textDecorationColor - IOS - Text Style Props
 - ❌ textDecorationStyle - IOS - Text Style Props
@@ -118,7 +118,7 @@
 - Border Style
     - ✅ borderStyle - View Style Props
 
-## Effects
+## （√）Effects
     - ✅ opacity - View Style Props | Image Style Props
 
 ## Interactivity
@@ -129,13 +129,11 @@
 - ❌ direction
 
 ## View Style Props
-> Progress 26/32
 - ✅ backfaceVisibility
 - ❌ borderCurve - IOS
 - ❌ elevation - Android
 
 ## Text Style Props
-> Progress 10/21
 - ❌ includeFontPadding - Android
 - ❌ textAlignVertical - Android
 - ❌ textShadowColor
@@ -144,14 +142,12 @@
 - ❌ writingDirection - IOS
 
 ## Shadow Props
-> Progress 0/4
 - ❌ shadowColor
 - ❌ shadowOffset - IOS
 - ❌ shadowOpacity - IOS
 - ❌ shadowRadius
 
 ## Image Style Props
-> Progress 12/15
 - ✅ backfaceVisibility
 - ❌ overlayColor - Android
 - ❌ resizeMode

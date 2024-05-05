@@ -1,0 +1,26 @@
+---
+title: User Select
+---
+
+import { Card, CardGrid } from '@astrojs/starlight/components';
+
+ `userSelect`允许用户选择文本并使用本机的复制和粘贴功能。
+
+## 基本使用
+
+使用`select-none | select-text | select-all | select-auto | select-contain`设置元素的`userSelect`。
+
+
+```typescript
+'select-none' ->  { userSelect: 'none' }
+'select-text' ->  { userSelect: 'text' }
+'select-all' ->  { userSelect: 'all' }
+'select-auto' ->  { userSelect: 'auto' }
+'select-contain' ->  { userSelect: 'contain' }
+```
+
+## 文档
+
+如果对此属性不熟悉，可以查看React Native的官方文档，链接在这里。
+
+- [Text Style Props#userselect](https://reactnative.dev/docs/text-style-props#userselect)

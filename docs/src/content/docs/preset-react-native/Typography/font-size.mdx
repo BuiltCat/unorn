@@ -1,0 +1,53 @@
+---
+title: Font Size
+---
+
+import { Card, CardGrid } from '@astrojs/starlight/components';
+
+ `fontSize`控制元素的字体。
+
+## 基本使用
+
+使用`test-{size}`设置元素的`fontSize`。
+
+
+```typescript
+'text-1' -> { fontSize: 1 }
+'text-2' -> { fontSize: 2 }
+'text-5' -> { fontSize: 5 }
+'text-10' -> { fontSize: 10 }
+```
+
+
+## 自定义
+
+### 自定义主题
+
+默认情况下，该预设只会提供一组基本的主题设置。你可以通过以下方式进行自定义主题。
+
+`fontFamily`可以使用`fontFamily`进行设置。
+
+
+1. 使用`fontFamily`进行设置。
+
+> 设置
+```diff lang="javascript"
+{
+    theme: {
++        fontSize: {
++           'xl': 1
++        },
+    }
+}
+```
+> 使用
+```diff lang="javascript"
+'text-xl' -> { fontSize: 1 }
+```
+
+
+## 文档
+
+如果对此属性不熟悉，可以查看React Native的官方文档，链接在这里。
+
+- [Text Style Props#fontsize](https://reactnative.dev/docs/text-style-props#fontsize)
