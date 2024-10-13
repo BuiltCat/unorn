@@ -1,0 +1,66 @@
+---
+title: Letter Spacing
+---
+
+
+ `letterSpacing`能够增加或减少字符直接的距离。
+
+## 基本使用
+
+使用`tracking-{size}`设置元素的`letterSpacing`。
+
+
+```typescript
+'tracking-normal' -> { letterSpacing: 0 }
+'tracking-tighter' -> { letterSpacing: -2 }
+'tracking-tight' -> { letterSpacing: -1 }
+'tracking-wide' -> { letterSpacing: 1 }
+'tracking-wider' -> { letterSpacing: 2 }
+'tracking-widest' -> { letterSpacing: 3 }
+'tracking-20' -> { letterSpacing: 20 }
+'-tracking-20' -> { letterSpacing: -20 }
+```
+
+
+## 自定义
+
+### 自定义主题
+
+默认情况下，该预设只会提供一组基本的主题设置。你可以通过以下方式进行自定义主题。
+
+`letterSpacing`可以使用`letterSpacing`进行设置。
+
+
+1. 使用`letterSpacing`进行设置。
+
+> 设置
+```diff lang="javascript"
+{
+    theme: {
++       letterSpacing: {
++           normal: 0,
++           tighter: -2,
++           tight: -1,
++           wide: 1,
++           wider: 2,
++           widest: 3,
++        },
+    }
+}
+```
+> 使用
+```diff lang="javascript"
+'tracking-normal' -> { letterSpacing: 0 }
+'tracking-tighter' -> { letterSpacing: -2 }
+'tracking-tight' -> { letterSpacing: -1 }
+'tracking-wide' -> { letterSpacing: 1 }
+'tracking-wider' -> { letterSpacing: 2 }
+'tracking-widest' -> { letterSpacing: 3 }
+```
+
+
+## 文档
+
+如果对此属性不熟悉，可以查看React Native的官方文档，链接在这里。
+
+- [Text Style Props#letterspacing](https://reactnative.dev/docs/text-style-props#letterspacing)

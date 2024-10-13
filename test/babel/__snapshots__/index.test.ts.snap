@@ -1,0 +1,24 @@
+// Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
+
+exports[`babel-auto-unorn-import > test 1`] = `
+"var _jsxFileName = "";
+import { createElement, Component } from 'rax';
+import { View } from 'react-native';
+import { jsxDEV as _jsxDEV } from "@unorn/babel-auto-unorn-import/jsx-dev-runtime";
+class App extends Component {
+  render() {
+    return _jsxDEV(View, {}, void 0, false, {
+      fileName: _jsxFileName,
+      lineNumber: 7,
+      columnNumber: 14
+    }, this);
+    return _jsxDEV("div", {
+      className: "header"
+    }, void 0, false, {
+      fileName: _jsxFileName,
+      lineNumber: 8,
+      columnNumber: 14
+    }, this);
+  }
+}"
+`;

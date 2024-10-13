@@ -1,0 +1,65 @@
+---
+title: Height
+---
+
+ `height`属性用于设置元素的高度。
+
+## 基本使用
+
+使用`h-{size}`设置元素的`height`。
+
+
+```typescript
+'h-0' -> { height: 0 }
+'h-0.5' -> { height: 0.5 }
+'h-1/2' -> { height: '50%' }
+```
+
+
+## 自定义
+
+### 自定义主题
+
+默认情况下，该预设只会提供一组基本的主题设置。你可以通过以下方式进行自定义主题。
+
+`height`可以使用`spacing`中的设置，也可以使用`height`中的设置。
+
+
+1. 使用`spacing`进行设置。
+
+> 设置
+```diff lang="javascript"
+{
+    theme: {
++        spacing: {
++           'base': 1
++        },
+    }
+}
+```
+> 使用
+```diff lang="javascript"
+'h-base' -> { height: 1 }
+```
+
+2. 使用`height`进行设置。
+> 设置
+```diff lang="javascript"
+{
+    theme: {
++        height: {
++           'xl': 5
++        },
+    }
+}
+```
+> 使用
+```diff lang="javascript"
+'h-xl' -> { height: 5 }
+```
+
+## 文档
+
+如果对此属性不熟悉，可以查看React Native的官方文档，链接在这里。
+
+- [Layout Props#height](https://reactnative.dev/docs/layout-props#height)

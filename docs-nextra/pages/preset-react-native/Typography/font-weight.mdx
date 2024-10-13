@@ -1,0 +1,59 @@
+---
+title: Font Weight
+---
+
+
+ `fontWeight`控制元素的粗细。
+
+## 基本使用
+
+使用`font-{size}`设置元素的`fontWeight`。
+
+
+```typescript
+'font-thin' -> { fontWeight: '100' }
+'font-extralight' -> { fontWeight: '200' }
+'font-light' -> { fontWeight: '300' }
+'font-normal' -> { fontWeight: 'normal' }
+'font-medium' -> { fontWeight: '500' }
+'font-semibold' -> { fontWeight: '600' }
+'font-bold' -> { fontWeight: 'bold' }
+'font-extrabold' -> { fontWeight: '800' }
+'font-black' -> { fontWeight: '900' }
+'font-400' -> { fontWeight: '400' }
+'font-600' -> { fontWeight: '600' }
+```
+
+
+## 自定义
+
+### 自定义主题
+
+默认情况下，该预设只会提供一组基本的主题设置。你可以通过以下方式进行自定义主题。
+
+`fontFamily`可以使用`fontFamily`进行设置。
+
+
+1. 使用`fontWeight`进行设置。
+
+> 设置
+```diff lang="javascript"
+{
+    theme: {
++        fontWeight: {
++           'hairline': '100'
++        },
+    }
+}
+```
+> 使用
+```diff lang="javascript"
+'fontWeight-hairline' -> { fontWeight: '100' }
+```
+
+
+## 文档
+
+如果对此属性不熟悉，可以查看React Native的官方文档，链接在这里。
+
+- [Text Style Props#fontweight](https://reactnative.dev/docs/text-style-props#fontweight)

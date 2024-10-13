@@ -1,5 +1,8 @@
 import type { DeepPartial, Rule, StaticRule } from '../types'
-import { isString } from '.'
+
+export function isString(s: any): s is string {
+  return typeof s === 'string'
+}
 
 export function isObject(item: any): item is Record<string, any> {
   return (item && typeof item === 'object' && !Array.isArray(item))

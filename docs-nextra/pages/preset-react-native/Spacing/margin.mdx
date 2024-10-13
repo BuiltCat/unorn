@@ -1,0 +1,134 @@
+---
+title: Margin
+---
+
+ `margin`控制元素所有四条边的外边距区域。
+
+## 基本使用
+
+使用`m{x|y|s|e|t|r|b|l}-{size}`设置元素的`margin` | `marginHorizontal` | 
+`marginVertical` | `marginStart` | `marginEnd` | `marginTop` |  `marginRight` |
+`marginBottom` | `marginLeft`。
+
+
+```typescript
+'m-0' -> { margin: 0 }
+'m-10' -> { margin: 10 }
+'m-20' -> { margin: 20 }
+'m-30' -> { margin: 30 }
+
+'mx-0' -> { marginHorizontal: 0 }
+'mx-10' -> { marginHorizontal: 10 }
+'mx-20' -> { marginHorizontal: 20 }
+'mx-30' -> { marginHorizontal: 30 }
+
+'my-0' -> { marginVertical: 0 }
+'my-10' -> { marginVertical: 10 }
+'my-20' -> { marginVertical: 20 }
+'my-30' -> { marginVertical: 30 }
+
+'mt-0' -> { marginTop: 0 }
+'mt-10' -> { marginTop: 10 }
+'mt-20' -> { marginTop: 20 }
+'mt-30' -> { marginTop: 30 }
+
+'mr-0' -> { marginRight: 0 }
+'mr-10' -> { marginRight: 10 }
+'mr-20' -> { marginRight: 20 }
+'mr-30' -> { marginRight: 30 }
+
+'mb-0' -> { marginBottom: 0 }
+'mb-10' -> { marginBottom: 10 }
+'mb-20' -> { marginBottom: 20 }
+'mb-30' -> { marginBottom: 30 }
+
+'ml-0' -> { marginLeft: 0 }
+'ml-10' -> { marginLeft: 10 }
+'ml-20' -> { marginLeft: 20 }
+'ml-30' -> { marginLeft: 30 }
+
+'ms-0' -> { marginStart: 0 }
+'ms-10' -> { marginStart: 10 }
+'ms-20' -> { marginStart: 20 }
+'ms-30' -> { marginStart: 30 }
+
+'me-0' -> { marginEnd: 0 }
+'me-10' -> { marginEnd: 10 }
+'me-20' -> { marginEnd: 20 }
+'me-30' -> { marginEnd: 30 }
+```
+
+
+## 自定义
+
+### 自定义主题
+
+默认情况下，该预设只会提供一组基本的主题设置。你可以通过以下方式进行自定义主题。
+
+`margin`可以使用`spacing`中的设置，也可以使用`margin`中的设置。
+
+
+1. 使用`spacing`进行设置。
+
+> 设置
+```diff lang="javascript"
+{
+    theme: {
++        spacing: {
++           'base': 1
++        },
+    }
+}
+```
+> 使用
+```diff lang="javascript"
+'m-base' -> { margin: 1 }
+'mx-base' -> { marginHorizontal: 1 }
+'my-base' -> { marginVertical: 1 }
+'mt-base' -> { marginTop: 1 }
+'mr-base' -> { marginRight: 1 }
+'mb-base' -> { marginBottom: 1 }
+'ml-base' -> { marginLeft: 1 }
+'ms-base' -> { marginStart: 1 }
+'me-base' -> { marginEnd: 1 }
+```
+
+
+2. 使用`margin`进行设置。
+> 设置
+```diff lang="javascript"
+{
+    theme: {
++        margin: {
++           'xl': 5
++        },
+    }
+}
+```
+> 使用
+```diff lang="javascript"
+
+'m-xl' -> { margin: 5 }
+'mx-xl' -> { marginHorizontal: 5 }
+'my-xl' -> { marginVertical: 5 }
+'mt-xl' -> { marginTop: 5 }
+'mr-xl' -> { marginRight: 5 }
+'mb-xl' -> { marginBottom: 5 }
+'ml-xl' -> { marginLeft: 5 }
+'ms-xl' -> { marginStart: 5 }
+'me-xl' -> { marginEnd: 5 }
+```
+
+## 文档
+
+如果对此属性不熟悉，可以查看React Native的官方文档，链接在这里。
+
+- [Layout Props#margin](https://reactnative.dev/docs/layout-props#margin)
+- [Layout Props#marginbottom](https://reactnative.dev/docs/layout-props#marginbottom)
+- [Layout Props#marginend](https://reactnative.dev/docs/layout-props#marginend)
+- [Layout Props#marginhorizontal](https://reactnative.dev/docs/layout-props#marginhorizontal)
+- [Layout Props#marginleft](https://reactnative.dev/docs/layout-props#marginleft)
+- [Layout Props#marginright](https://reactnative.dev/docs/layout-props#marginright)
+- [Layout Props#marginstart](https://reactnative.dev/docs/layout-props#marginstart)
+- [Layout Props#margintop](https://reactnative.dev/docs/layout-props#margintop)
+- [Layout Props#marginvertical](https://reactnative.dev/docs/layout-props#marginvertical)

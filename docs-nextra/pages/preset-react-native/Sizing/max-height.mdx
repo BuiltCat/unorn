@@ -1,0 +1,65 @@
+---
+title: Max Height
+---
+
+ `max-height`属性用于设置元素的最大高度。
+ 
+## 基本使用
+
+使用`max-h-{size}`设置元素的`maxHeight`。
+
+
+```typescript
+'max-h-0' -> { maxHeight: 0 }
+'max-h-0.5' -> { maxHeight: 0.5 }
+'max-h-1/2' -> { maxHeight: '50%' }
+```
+
+
+## 自定义
+
+### 自定义主题
+
+默认情况下，该预设只会提供一组基本的主题设置。你可以通过以下方式进行自定义主题。
+
+`maxHeight`可以使用`spacing`中的设置，也可以使用`maxHeight`中的设置。
+
+
+1. 使用`spacing`进行设置。
+
+> 设置
+```diff lang="javascript"
+{
+    theme: {
++        spacing: {
++           'base': 1
++        },
+    }
+}
+```
+> 使用
+```diff lang="javascript"
+'max-h-base' -> { maxHeight: 1 }
+```
+
+2. 使用`maxHeight`进行设置。
+> 设置
+```diff lang="javascript"
+{
+    theme: {
++        maxHeight: {
++           'xl': 5
++        },
+    }
+}
+```
+> 使用
+```diff lang="javascript"
+'max-h-xl' -> { maxHeight: 5 }
+```
+
+## 文档
+
+如果对此属性不熟悉，可以查看React Native的官方文档，链接在这里。
+
+- [Layout Props#maxHeight](https://reactnative.dev/docs/layout-props#maxHeight)

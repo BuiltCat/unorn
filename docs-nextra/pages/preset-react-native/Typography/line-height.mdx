@@ -1,0 +1,62 @@
+---
+title: Line Height
+---
+
+
+ `lineHeight`用来控制每行文本之间的高度。
+
+## 基本使用
+
+使用`leading-{size}`设置元素的`lineHeight`。
+
+
+```typescript
+'leading-3' -> { lineHeight: 3 }
+'leading-4' -> { lineHeight: 4 }
+'leading-5' -> { lineHeight: 5 }
+'leading-6' -> { lineHeight: 6 }
+'leading-7' -> { lineHeight: 7 }
+'leading-8' -> { lineHeight: 8 }
+'leading-9' -> { lineHeight: 9 }
+'leading-10' -> { lineHeight: 10 }
+'leading-none' -> { lineHeight: 1 }
+'leading-tight' -> { lineHeight: 1.25 }
+'leading-snug' -> { lineHeight: 1.375 }
+'leading-normal' -> { lineHeight: 1.5 }
+'leading-relaxed' -> { lineHeight: 1.625 }
+'leading-loose' -> { lineHeight: 2 }
+```
+
+
+## 自定义
+
+### 自定义主题
+
+默认情况下，该预设只会提供一组基本的主题设置。你可以通过以下方式进行自定义主题。
+
+`lineHeight`可以使用`lineHeight`进行设置。
+
+
+1. 使用`lineHeight`进行设置。
+
+> 设置
+```diff lang="javascript"
+{
+    theme: {
++       lineHeight: {
++           leading-extra-loose: 2.5,
++       },
+    }
+}
+```
+> 使用
+```diff lang="javascript"
+'leading-extra-loose' -> { lineHeight: 2.5 }
+```
+
+
+## 文档
+
+如果对此属性不熟悉，可以查看React Native的官方文档，链接在这里。
+
+- [Text Style Props#lineheight](https://reactnative.dev/docs/text-style-props#lineheight)

@@ -9,7 +9,7 @@ import { spacing } from './spacing'
 import { backfaceVisibility, backgroundColor } from './view'
 import { size } from './size'
 import { effects } from './effects'
-import { interactivity } from './Interactivity'
+import { interactivity } from './interactivity'
 
 export const rules: Rule<Theme>[] = [
   flex,
